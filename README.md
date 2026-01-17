@@ -5,7 +5,7 @@ A new Flutter project.
 
 ### TODO
 
-- [ ] List categories
+- [X] List categories
 - [ ] List suggestions
 - [ ] Search recipes
 - [ ] List category recipes
