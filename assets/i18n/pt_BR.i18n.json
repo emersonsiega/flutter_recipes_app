@@ -1,8 +1,17 @@
 {
     "appTitle": "Receitas App",
+    "failures": {
+        "generic": "Ocorreu um erro inesperado ao carregar os dados. Por favor, tente novamente."
+    },
+    "errorMessageBox": {
+        "retry": "Tentar novamente"
+    },
     "recipes": {
         "title": "Receitas",
         "searchPlaceholder": "Pesquisar receita por nome",
-        "categories": "Categorias"
+        "categories": "Categorias",
+        "noCategoriesFound": "Nenhuma categoria encontrada",
+        "searching": "Buscando...",
+        "retry": "Recarregar lista"
     }
 }

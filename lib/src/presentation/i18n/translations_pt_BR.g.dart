@@ -44,7 +44,33 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	/// pt-BR: 'Receitas App'
 	String get appTitle => 'Receitas App';
 
+	late final TranslationsFailuresPtBr failures = TranslationsFailuresPtBr._(_root);
+	late final TranslationsErrorMessageBoxPtBr errorMessageBox = TranslationsErrorMessageBoxPtBr._(_root);
 	late final TranslationsRecipesPtBr recipes = TranslationsRecipesPtBr._(_root);
+}
+
+// Path: failures
+class TranslationsFailuresPtBr {
+	TranslationsFailuresPtBr._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// pt-BR: 'Ocorreu um erro inesperado ao carregar os dados. Por favor, tente novamente.'
+	String get generic => 'Ocorreu um erro inesperado ao carregar os dados. Por favor, tente novamente.';
+}
+
+// Path: errorMessageBox
+class TranslationsErrorMessageBoxPtBr {
+	TranslationsErrorMessageBoxPtBr._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// pt-BR: 'Tentar novamente'
+	String get retry => 'Tentar novamente';
 }
 
 // Path: recipes
@@ -63,6 +89,15 @@ class TranslationsRecipesPtBr {
 
 	/// pt-BR: 'Categorias'
 	String get categories => 'Categorias';
+
+	/// pt-BR: 'Nenhuma categoria encontrada'
+	String get noCategoriesFound => 'Nenhuma categoria encontrada';
+
+	/// pt-BR: 'Buscando...'
+	String get searching => 'Buscando...';
+
+	/// pt-BR: 'Recarregar lista'
+	String get retry => 'Recarregar lista';
 }
 
 /// The flat map containing all translations for locale <pt-BR>.
@@ -74,9 +109,14 @@ extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
 			'appTitle' => 'Receitas App',
+			'failures.generic' => 'Ocorreu um erro inesperado ao carregar os dados. Por favor, tente novamente.',
+			'errorMessageBox.retry' => 'Tentar novamente',
 			'recipes.title' => 'Receitas',
 			'recipes.searchPlaceholder' => 'Pesquisar receita por nome',
 			'recipes.categories' => 'Categorias',
+			'recipes.noCategoriesFound' => 'Nenhuma categoria encontrada',
+			'recipes.searching' => 'Buscando...',
+			'recipes.retry' => 'Recarregar lista',
 			_ => null,
 		};
 	}

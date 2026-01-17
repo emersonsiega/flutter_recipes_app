@@ -19,7 +19,7 @@ Future<void> bootstrap() async {
   );
 }
 
-List<Provider> _setupProviders() {
+List<InheritedProvider> _setupProviders() {
   return [
     Provider<Constants>(create: (_) => Constants()),
     Provider<http.Client>(create: (_) => http.Client()),
@@ -34,6 +34,9 @@ List<Provider> _setupProviders() {
       create: (context) => RecipeRepository(
         remoteDatasource: context.read<IRecipeRemoteDatasource>(),
       ),
+    ),
+    ChangeNotifierProvider<RecipesScreenViewModel>(
+      create: (context) => RecipesScreenViewModel(),
     ),
   ];
 }
