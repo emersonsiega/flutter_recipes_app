@@ -2,6 +2,15 @@
 targets:
   $default:
     builders:
+      slang_build_runner:
+        options:
+          base_locale: pt_BR
+          input_directory: assets/i18n
+          input_file_pattern: .i18n.json
+          output_directory: lib/src/presentation/i18n
+          output_file_name: translations.g.dart
+          string_interpolation: braces
+          generate_enum: false
       freezed:
         options:
           format: true

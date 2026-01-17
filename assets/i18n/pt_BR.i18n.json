@@ -1,0 +1,8 @@
+{
+    "appTitle": "Receitas App",
+    "recipes": {
+        "title": "Receitas",
+        "searchPlaceholder": "Pesquisar receita por nome",
+        "categories": "Categorias"
+    }
+}
