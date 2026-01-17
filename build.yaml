@@ -1,0 +1,9 @@
+# build.yaml
+targets:
+  $default:
+    builders:
+      freezed:
+        options:
+          format: true
+          when: false
+          map: false
