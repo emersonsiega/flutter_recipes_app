@@ -36,7 +36,9 @@ List<InheritedProvider> _setupProviders() {
       ),
     ),
     ChangeNotifierProvider<RecipesScreenViewModel>(
-      create: (context) => RecipesScreenViewModel(),
+      create: (context) => RecipesScreenViewModel(
+        context.read<IRecipeRepository>(),
+      ),
     ),
   ];
 }

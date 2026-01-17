@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_recipes_app/src/presentation/extensions/extensions.dart';
 
-class ProgressIndicator extends StatelessWidget {
+class CustomProgressIndicator extends StatelessWidget {
   final double size;
-  const ProgressIndicator({super.key, this.size = 24});
+  const CustomProgressIndicator({super.key, this.size = 24});
 
   @override
   Widget build(BuildContext context) {

@@ -3,20 +3,22 @@ import 'package:flutter_recipes_app/src/domain/domain.dart';
 import 'package:flutter_recipes_app/src/presentation/views/recipes/recipes_screen_state.dart';
 
 class RecipesScreenViewModel extends ChangeNotifier {
-  RecipesScreenViewModel();
+  final IRecipeRepository _recipeRepository;
+  RecipesScreenViewModel(this._recipeRepository);
 
   RecipesScreenState _state = const RecipesScreenState.idle();
   RecipesScreenState get state => _state;
 
-  // Example: fetched categories, can be replaced with real data fetching logic
+  /// Fetches all available recipe categories
   Future<void> fetchCategories() async {
     _state = const RecipesScreenState.loading();
     notifyListeners();
 
-    // Replace with actual fetching logic
-    await Future.delayed(const Duration(seconds: 1));
-    final exampleCategories = <Category>[];
-    _state = RecipesScreenState.success(categories: exampleCategories);
+    final result = await _recipeRepository.getCategories();
+    _state = result.fold(
+      ifLeft: (_) => ErrorState(),
+      ifRight: (categories) => SuccessState(categories: categories),
+    );
     notifyListeners();
   }
 
@@ -28,7 +30,6 @@ class RecipesScreenViewModel extends ChangeNotifier {
 
       // Simulate an API call
       await Future.delayed(const Duration(seconds: 1));
-
 
       final exampleResults = <RecipeSummary>[];
       _state = copyWith(query: query, queryResult: exampleResults, searching: false);
