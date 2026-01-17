@@ -3,12 +3,14 @@
 /// Domain failures represent business-level errors that can occur
 /// during domain operations, abstracting away the underlying implementation
 /// details (network, storage, etc.)
-abstract class Failure implements Exception {
+class Failure implements Exception {
   /// Human-readable error message
-  String get message;
+  final String message;
 
   /// Optional underlying exception that caused this failure
-  Object? cause;
+  final Object? cause;
+
+  Failure({required this.message, this.cause});
 
   @override
   String toString() => message;

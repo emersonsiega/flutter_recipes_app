@@ -13,10 +13,10 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$Category {
-  String get id;
+  String? get id;
   String get name;
-  String get description;
-  Uri get imageUrl;
+  String? get description;
+  Uri? get imageUrl;
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.
@@ -52,7 +52,7 @@ abstract mixin class $CategoryCopyWith<$Res> {
   factory $CategoryCopyWith(Category value, $Res Function(Category) _then) =
       _$CategoryCopyWithImpl;
   @useResult
-  $Res call({String id, String name, String description, Uri imageUrl});
+  $Res call({String? id, String name, String? description, Uri? imageUrl});
 }
 
 /// @nodoc
@@ -67,29 +67,29 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
-    Object? description = null,
-    Object? imageUrl = null,
+    Object? description = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(
       _self.copyWith(
-        id: null == id
+        id: freezed == id
             ? _self.id
             : id // ignore: cast_nullable_to_non_nullable
-                  as String,
+                  as String?,
         name: null == name
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
-        description: null == description
+        description: freezed == description
             ? _self.description
             : description // ignore: cast_nullable_to_non_nullable
-                  as String,
-        imageUrl: null == imageUrl
+                  as String?,
+        imageUrl: freezed == imageUrl
             ? _self.imageUrl
             : imageUrl // ignore: cast_nullable_to_non_nullable
-                  as Uri,
+                  as Uri?,
       ),
     );
   }
@@ -98,21 +98,16 @@ class _$CategoryCopyWithImpl<$Res> implements $CategoryCopyWith<$Res> {
 /// @nodoc
 
 class _Category implements Category {
-  _Category({
-    required this.id,
-    required this.name,
-    required this.description,
-    required this.imageUrl,
-  });
+  _Category({this.id, required this.name, this.description, this.imageUrl});
 
   @override
-  final String id;
+  final String? id;
   @override
   final String name;
   @override
-  final String description;
+  final String? description;
   @override
-  final Uri imageUrl;
+  final Uri? imageUrl;
 
   /// Create a copy of Category
   /// with the given fields replaced by the non-null parameter values.
@@ -151,7 +146,7 @@ abstract mixin class _$CategoryCopyWith<$Res>
       __$CategoryCopyWithImpl;
   @override
   @useResult
-  $Res call({String id, String name, String description, Uri imageUrl});
+  $Res call({String? id, String name, String? description, Uri? imageUrl});
 }
 
 /// @nodoc
@@ -166,29 +161,29 @@ class __$CategoryCopyWithImpl<$Res> implements _$CategoryCopyWith<$Res> {
   @override
   @pragma('vm:prefer-inline')
   $Res call({
-    Object? id = null,
+    Object? id = freezed,
     Object? name = null,
-    Object? description = null,
-    Object? imageUrl = null,
+    Object? description = freezed,
+    Object? imageUrl = freezed,
   }) {
     return _then(
       _Category(
-        id: null == id
+        id: freezed == id
             ? _self.id
             : id // ignore: cast_nullable_to_non_nullable
-                  as String,
+                  as String?,
         name: null == name
             ? _self.name
             : name // ignore: cast_nullable_to_non_nullable
                   as String,
-        description: null == description
+        description: freezed == description
             ? _self.description
             : description // ignore: cast_nullable_to_non_nullable
-                  as String,
-        imageUrl: null == imageUrl
+                  as String?,
+        imageUrl: freezed == imageUrl
             ? _self.imageUrl
             : imageUrl // ignore: cast_nullable_to_non_nullable
-                  as Uri,
+                  as Uri?,
       ),
     );
   }
