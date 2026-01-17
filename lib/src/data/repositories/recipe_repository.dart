@@ -53,4 +53,15 @@ class RecipeRepository with HttpExceptionHandlerMixin implements IRecipeReposito
       },
     );
   }
+
+  @override
+  Future<Either<Failure, DetailedRecipe>> getRandomRecipe() async {
+    return await handleHttpExceptions(
+      operation: 'getRandomRecipe',
+      action: () async {
+        final recipeModel = await remoteDatasource.getRandomRecipe();
+        return recipeModel.toEntity();
+      },
+    );
+  }
 }

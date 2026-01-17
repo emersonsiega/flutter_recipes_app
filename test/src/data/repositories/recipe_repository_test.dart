@@ -7,6 +7,8 @@ import 'package:flutter_recipes_app/src/domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
+import '../../utils/faker_test_helpers.dart';
+
 class MockRecipeRemoteDatasource extends Mock implements IRecipeRemoteDatasource {}
 
 void main() {
@@ -24,15 +26,7 @@ void main() {
     group('Success', () {
       test('should return list of categories when datasource succeeds', () async {
         // Arrange
-        final categoryModels = List.generate(
-          3,
-          (index) => CategoryModel(
-            idCategory: faker.guid.guid(),
-            strCategory: faker.food.cuisine(),
-            strCategoryDescription: faker.lorem.sentence(),
-            strCategoryThumb: faker.internet.httpsUrl(),
-          ),
-        );
+        final categoryModels = List.generate(3, (index) => faker.createCategoryModel());
         final categoriesResponse = CategoriesResponseModel(categories: categoryModels);
 
         when(() => mockRemoteDatasource.getCategories()).thenAnswer((_) async => categoriesResponse);
@@ -141,13 +135,11 @@ void main() {
         final searchQuery = faker.food.dish();
         final detailedRecipeModels = List.generate(
           2,
-          (index) => DetailedRecipeModel(
-            idMeal: faker.guid.guid(),
-            strMeal: faker.food.dish(),
-            strCategory: faker.food.cuisine(),
-            strMealThumb: faker.internet.httpsUrl(),
-            strIngredient1: faker.lorem.word(),
-            strMeasure1: faker.lorem.word(),
+          (index) => faker.createDetailedRecipeModel(
+            ingredientCount: 1,
+            includeInstructions: false,
+            includeTags: false,
+            includeYoutube: false,
           ),
         );
         final mealsResponse = MealsResponseModel(
@@ -282,19 +274,8 @@ void main() {
     group('Success', () {
       test('should return list of recipe summaries when datasource succeeds', () async {
         // Arrange
-        final category = Category(
-          id: faker.guid.guid(),
-          name: faker.food.cuisine(),
-          description: faker.lorem.sentence(),
-        );
-        final recipeSummaryModels = List.generate(
-          5,
-          (index) => RecipeSummaryModel(
-            idMeal: faker.guid.guid(),
-            strMeal: faker.food.dish(),
-            strMealThumb: faker.internet.httpsUrl(),
-          ),
-        );
+        final category = faker.createCategory();
+        final recipeSummaryModels = List.generate(5, (index) => faker.createRecipeSummaryModel());
         final mealsResponse = MealsResponseModel(
           meals: recipeSummaryModels.map((model) => model.toJson()).toList(),
         );
@@ -321,10 +302,7 @@ void main() {
     group('Failure', () {
       test('should return Failure when datasource throws TimeoutException', () async {
         // Arrange
-        final category = Category(
-          id: faker.guid.guid(),
-          name: faker.food.cuisine(),
-        );
+        final category = faker.createCategory(description: null);
         when(
           () => mockRemoteDatasource.getRecipesByCategory(category.name),
         ).thenThrow(TimeoutException('Request timeout'));
@@ -346,10 +324,7 @@ void main() {
 
       test('should return Failure when datasource throws FormatException', () async {
         // Arrange
-        final category = Category(
-          id: faker.guid.guid(),
-          name: faker.food.cuisine(),
-        );
+        final category = faker.createCategory(description: null);
         when(
           () => mockRemoteDatasource.getRecipesByCategory(category.name),
         ).thenThrow(FormatException('Invalid JSON format'));
@@ -371,10 +346,7 @@ void main() {
 
       test('should return Failure when datasource throws generic Exception', () async {
         // Arrange
-        final category = Category(
-          id: faker.guid.guid(),
-          name: faker.food.cuisine(),
-        );
+        final category = faker.createCategory(description: null);
         final exception = Exception('Server error');
         when(() => mockRemoteDatasource.getRecipesByCategory(category.name)).thenThrow(exception);
 
@@ -419,19 +391,7 @@ void main() {
       test('should return detailed recipe when datasource succeeds', () async {
         // Arrange
         final recipeId = faker.guid.guid();
-        final detailedRecipeModel = DetailedRecipeModel(
-          idMeal: recipeId,
-          strMeal: faker.food.dish(),
-          strCategory: faker.food.cuisine(),
-          strMealThumb: faker.internet.httpsUrl(),
-          strIngredient1: faker.lorem.word(),
-          strMeasure1: faker.lorem.word(),
-          strIngredient2: faker.lorem.word(),
-          strMeasure2: faker.lorem.word(),
-          strInstructions: faker.lorem.sentence(),
-          strTags: '${faker.lorem.word()}, ${faker.lorem.word()}',
-          strYoutube: faker.internet.httpsUrl(),
-        );
+        final detailedRecipeModel = faker.createDetailedRecipeModel(idMeal: recipeId);
 
         when(() => mockRemoteDatasource.getRecipeById(recipeId)).thenAnswer((_) async => detailedRecipeModel);
 
@@ -531,6 +491,55 @@ void main() {
           ifRight: (_) => fail('Expected Left but got Right'),
         );
         verify(() => mockRemoteDatasource.getRecipeById('')).called(1);
+      });
+    });
+  });
+
+  group('getRandomRecipe', () {
+    group('Success', () {
+      test('should return detailed recipe when datasource succeeds', () async {
+        // Arrange
+        final recipeId = faker.guid.guid();
+        final detailedRecipeModel = faker.createDetailedRecipeModel(idMeal: recipeId);
+
+        when(() => mockRemoteDatasource.getRandomRecipe()).thenAnswer((_) async => detailedRecipeModel);
+
+        // Act
+        final result = await sut.getRandomRecipe();
+
+        // Assert
+        expect(result, isA<Right<Failure, DetailedRecipe>>());
+        result.fold(
+          ifLeft: (failure) => fail('Expected Right but got Left: ${failure.message}'),
+          ifRight: (recipe) {
+            expect(recipe.id, recipeId);
+            expect(recipe.name, detailedRecipeModel.strMeal);
+            expect(recipe.ingredients, hasLength(2));
+            expect(recipe.tags, hasLength(2));
+          },
+        );
+        verify(() => mockRemoteDatasource.getRandomRecipe()).called(1);
+      });
+    });
+
+    group('Failure', () {
+      test('should return Failure when datasource throws', () async {
+        // Arrange
+        when(() => mockRemoteDatasource.getRandomRecipe()).thenThrow(TimeoutException('Request timeout'));
+
+        // Act
+        final result = await sut.getRandomRecipe();
+
+        // Assert
+        expect(result, isA<Left<Failure, DetailedRecipe>>());
+        result.fold(
+          ifLeft: (failure) {
+            expect(failure.message, contains('Timeout occurred while performing getRandomRecipe'));
+            expect(failure.cause, isA<TimeoutException>());
+          },
+          ifRight: (_) => fail('Expected Left but got Right'),
+        );
+        verify(() => mockRemoteDatasource.getRandomRecipe()).called(1);
       });
     });
   });

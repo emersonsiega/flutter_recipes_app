@@ -18,6 +18,9 @@ abstract class IRecipeRemoteDatasource {
 
   /// Fetches detailed recipe information by ID.
   Future<DetailedRecipeModel> getRecipeById(String id);
+
+  /// Fetches a single random recipe.
+  Future<DetailedRecipeModel> getRandomRecipe();
 }
 
 /// Implementation of [IRecipeRemoteDatasource] using TheMealDB API.
@@ -57,6 +60,16 @@ class RecipeRemoteDatasource implements IRecipeRemoteDatasource {
   @override
   Future<DetailedRecipeModel> getRecipeById(String id) async {
     final uri = Uri.parse('$baseUrl/lookup.php?i=$id');
+    final response = await httpClient.get(uri);
+    final json = jsonDecode(response.body) as Map<String, dynamic>;
+    final mealsResponse = MealsResponseModel.fromJson(json);
+    final recipeJson = mealsResponse.meals.first as Map<String, dynamic>;
+    return DetailedRecipeModel.fromJson(recipeJson);
+  }
+
+  @override
+  Future<DetailedRecipeModel> getRandomRecipe() async {
+    final uri = Uri.parse('$baseUrl/random.php');
     final response = await httpClient.get(uri);
     final json = jsonDecode(response.body) as Map<String, dynamic>;
     final mealsResponse = MealsResponseModel.fromJson(json);

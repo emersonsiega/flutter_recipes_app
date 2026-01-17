@@ -16,4 +16,7 @@ abstract class IRecipeRepository {
 
   /// Retrieves detailed information for a recipe by its ID.
   Future<Either<Failure, DetailedRecipe>> getRecipeById(String id);
+
+  /// Fetches a single random recipe.
+  Future<Either<Failure, DetailedRecipe>> getRandomRecipe();
 }
