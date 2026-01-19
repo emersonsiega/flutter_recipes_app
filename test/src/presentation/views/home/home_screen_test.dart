@@ -2,40 +2,40 @@ import 'package:faker/faker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_recipes_app/src/data/data.dart';
 import 'package:flutter_recipes_app/src/presentation/presentation.dart';
-import 'package:flutter_recipes_app/src/presentation/views/recipes/widgets/widgets.dart';
+import 'package:flutter_recipes_app/src/presentation/views/home/widgets/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/faker_test_helpers.dart';
 
-class MockRecipesScreenViewModel extends Mock implements RecipesScreenViewModel {}
+class MockHomeViewController extends Mock implements HomeViewController {}
 
 void main() {
-  late MockRecipesScreenViewModel mockViewModel;
+  late MockHomeViewController mockViewModel;
   late Faker faker;
 
   setUp(() {
-    mockViewModel = MockRecipesScreenViewModel();
+    mockViewModel = MockHomeViewController();
     faker = Faker();
     LocaleSettings.setLocale(AppLocale.ptBr);
   });
 
-  Widget createTestWidget(RecipesScreenViewModel viewModel) {
+  Widget createTestWidget(HomeViewController viewModel) {
     return MaterialApp(
-      home: ChangeNotifierProvider<RecipesScreenViewModel>.value(
+      home: ChangeNotifierProvider<HomeViewController>.value(
         value: viewModel,
-        child: const RecipesScreen(),
+        child: const HomeScreen(),
       ),
     );
   }
 
-  group('RecipesScreen', () {
+  group('HomeScreen', () {
     group('Initial Load', () {
       testWidgets('should call fetchData on init', (tester) async {
         // Arrange
         when(() => mockViewModel.state).thenReturn(
-          const RecipesScreenState(
+          const HomeState(
             categories: AsyncData(data: [], isLoading: true),
             suggestions: AsyncData(data: [], isLoading: true),
           ),
@@ -57,7 +57,7 @@ void main() {
           final categories = List.generate(3, (index) => faker.createCategory());
 
           when(() => mockViewModel.state).thenReturn(
-            RecipesScreenState(
+            HomeState(
               categories: AsyncData(data: categories, isLoading: false),
               suggestions: AsyncData(data: [], isLoading: false),
             ),
@@ -77,7 +77,7 @@ void main() {
         testWidgets('should display no categories message when categories list is empty', (tester) async {
           // Arrange
           when(() => mockViewModel.state).thenReturn(
-            const RecipesScreenState(
+            const HomeState(
               categories: AsyncData(data: [], isLoading: false),
               suggestions: AsyncData(data: [], isLoading: false),
             ),
@@ -98,7 +98,7 @@ void main() {
         testWidgets('should display error message box when fetchCategories fails', (tester) async {
           // Arrange
           when(() => mockViewModel.state).thenReturn(
-            const RecipesScreenState(
+            const HomeState(
               categories: AsyncData(data: [], isLoading: false, hasError: true),
               suggestions: AsyncData(data: [], isLoading: false),
             ),
@@ -119,7 +119,7 @@ void main() {
         testWidgets('should call fetchCategories when retry button is tapped', (tester) async {
           // Arrange
           when(() => mockViewModel.state).thenReturn(
-            const RecipesScreenState(
+            const HomeState(
               categories: AsyncData(data: [], isLoading: false, hasError: true),
               suggestions: AsyncData(data: [], isLoading: false),
             ),
@@ -148,7 +148,7 @@ void main() {
       testWidgets('should display loading card when categories are loading', (tester) async {
         // Arrange
         when(() => mockViewModel.state).thenReturn(
-          const RecipesScreenState(
+          const HomeState(
             categories: AsyncData(data: [], isLoading: true),
             suggestions: AsyncData(data: [], isLoading: false),
           ),
@@ -173,7 +173,7 @@ void main() {
         final suggestions = List.generate(3, (index) => faker.createDetailedRecipeModel().toEntity());
 
         when(() => mockViewModel.state).thenReturn(
-          RecipesScreenState(
+          HomeState(
             categories: AsyncData(data: [], isLoading: false),
             suggestions: AsyncData(data: suggestions, isLoading: false),
           ),
@@ -193,7 +193,7 @@ void main() {
       testWidgets('should display no suggestions message when suggestions list is empty', (tester) async {
         // Arrange
         when(() => mockViewModel.state).thenReturn(
-          const RecipesScreenState(
+          const HomeState(
             categories: AsyncData(data: [], isLoading: false),
             suggestions: AsyncData(data: [], isLoading: false),
           ),
@@ -214,7 +214,7 @@ void main() {
       testWidgets('should display error message box when fetchSuggestions fails', (tester) async {
         // Arrange
         when(() => mockViewModel.state).thenReturn(
-          const RecipesScreenState(
+          const HomeState(
             categories: AsyncData(data: [], isLoading: false),
             suggestions: AsyncData(data: [], isLoading: false, hasError: true),
           ),
@@ -235,7 +235,7 @@ void main() {
       testWidgets('should call fetchSuggestions when retry button is tapped', (tester) async {
         // Arrange
         when(() => mockViewModel.state).thenReturn(
-          const RecipesScreenState(
+          const HomeState(
             categories: AsyncData(data: [], isLoading: false),
             suggestions: AsyncData(data: [], isLoading: false, hasError: true),
           ),
@@ -263,7 +263,7 @@ void main() {
       testWidgets('should display loading card when suggestions are loading', (tester) async {
         // Arrange
         when(() => mockViewModel.state).thenReturn(
-          const RecipesScreenState(
+          const HomeState(
             categories: AsyncData(data: [], isLoading: false),
             suggestions: AsyncData(data: [], isLoading: true),
           ),

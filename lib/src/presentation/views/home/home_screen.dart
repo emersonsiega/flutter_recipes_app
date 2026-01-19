@@ -2,25 +2,25 @@ import 'package:flutter/material.dart' hide SearchBar;
 import 'package:flutter_recipes_app/src/domain/domain.dart';
 import 'package:flutter_recipes_app/src/presentation/extensions/extensions.dart';
 import 'package:flutter_recipes_app/src/presentation/i18n/i18n.dart';
-import 'package:flutter_recipes_app/src/presentation/views/recipes/recipes_screen_state.dart';
-import 'package:flutter_recipes_app/src/presentation/views/recipes/recipes_screen_viewmodel.dart';
-import 'package:flutter_recipes_app/src/presentation/views/recipes/widgets/widgets.dart';
+import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_state.dart';
+import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_viewmodel.dart';
+import 'package:flutter_recipes_app/src/presentation/views/home/widgets/widgets.dart';
 import 'package:flutter_recipes_app/src/presentation/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class RecipesScreen extends StatefulWidget {
-  const RecipesScreen({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
   @override
-  State<RecipesScreen> createState() => _RecipesScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _RecipesScreenState extends State<RecipesScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
     postFrame(() {
-      context.read<RecipesScreenViewModel>().fetchData();
+      context.read<HomeViewController>().fetchData();
     });
   }
 
@@ -31,10 +31,10 @@ class _RecipesScreenState extends State<RecipesScreen> {
       body: SafeArea(
         child: Builder(
           builder: (context) {
-            final categories = context.select<RecipesScreenViewModel, AsyncData<List<Category>>>(
+            final categories = context.select<HomeViewController, AsyncData<List<Category>>>(
               (viewModel) => viewModel.state.categories,
             );
-            final suggestions = context.select<RecipesScreenViewModel, AsyncData<List<Recipe>>>(
+            final suggestions = context.select<HomeViewController, AsyncData<List<Recipe>>>(
               (viewModel) => viewModel.state.suggestions,
             );
 
@@ -88,7 +88,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: ErrorMessageBox(
-              onRetry: context.read<RecipesScreenViewModel>().fetchCategories,
+              onRetry: context.read<HomeViewController>().fetchCategories,
               retryLabel: t.errorMessageBox.retry,
               message: t.recipes.errorLoadingCategories,
             ),
@@ -135,7 +135,7 @@ class _RecipesScreenState extends State<RecipesScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: ErrorMessageBox(
-              onRetry: context.read<RecipesScreenViewModel>().fetchSuggestions,
+              onRetry: context.read<HomeViewController>().fetchSuggestions,
               retryLabel: t.errorMessageBox.retry,
               message: t.recipes.errorLoadingSuggestions,
             ),

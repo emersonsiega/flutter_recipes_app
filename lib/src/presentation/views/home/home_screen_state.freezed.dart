@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'recipes_screen_state.dart';
+part of 'home_screen_state.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -12,25 +12,22 @@ part of 'recipes_screen_state.dart';
 T _$identity<T>(T value) => value;
 
 /// @nodoc
-mixin _$RecipesScreenState {
+mixin _$HomeState {
   AsyncData<List<Category>> get categories;
   AsyncData<List<Recipe>> get suggestions;
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $RecipesScreenStateCopyWith<RecipesScreenState> get copyWith =>
-      _$RecipesScreenStateCopyWithImpl<RecipesScreenState>(
-        this as RecipesScreenState,
-        _$identity,
-      );
+  $HomeStateCopyWith<HomeState> get copyWith =>
+      _$HomeStateCopyWithImpl<HomeState>(this as HomeState, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is RecipesScreenState &&
+            other is HomeState &&
             (identical(other.categories, categories) ||
                 other.categories == categories) &&
             (identical(other.suggestions, suggestions) ||
@@ -42,16 +39,14 @@ mixin _$RecipesScreenState {
 
   @override
   String toString() {
-    return 'RecipesScreenState(categories: $categories, suggestions: $suggestions)';
+    return 'HomeState(categories: $categories, suggestions: $suggestions)';
   }
 }
 
 /// @nodoc
-abstract mixin class $RecipesScreenStateCopyWith<$Res> {
-  factory $RecipesScreenStateCopyWith(
-    RecipesScreenState value,
-    $Res Function(RecipesScreenState) _then,
-  ) = _$RecipesScreenStateCopyWithImpl;
+abstract mixin class $HomeStateCopyWith<$Res> {
+  factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) _then) =
+      _$HomeStateCopyWithImpl;
   @useResult
   $Res call({
     AsyncData<List<Category>> categories,
@@ -63,14 +58,13 @@ abstract mixin class $RecipesScreenStateCopyWith<$Res> {
 }
 
 /// @nodoc
-class _$RecipesScreenStateCopyWithImpl<$Res>
-    implements $RecipesScreenStateCopyWith<$Res> {
-  _$RecipesScreenStateCopyWithImpl(this._self, this._then);
+class _$HomeStateCopyWithImpl<$Res> implements $HomeStateCopyWith<$Res> {
+  _$HomeStateCopyWithImpl(this._self, this._then);
 
-  final RecipesScreenState _self;
-  final $Res Function(RecipesScreenState) _then;
+  final HomeState _self;
+  final $Res Function(HomeState) _then;
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
@@ -89,7 +83,7 @@ class _$RecipesScreenStateCopyWithImpl<$Res>
     );
   }
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -99,7 +93,7 @@ class _$RecipesScreenStateCopyWithImpl<$Res>
     });
   }
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -112,8 +106,8 @@ class _$RecipesScreenStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _RecipesScreenState implements RecipesScreenState {
-  const _RecipesScreenState({
+class _HomeState implements HomeState {
+  const _HomeState({
     this.categories = const AsyncData<List<Category>>(data: []),
     this.suggestions = const AsyncData<List<Recipe>>(data: []),
   });
@@ -125,19 +119,19 @@ class _RecipesScreenState implements RecipesScreenState {
   @JsonKey()
   final AsyncData<List<Recipe>> suggestions;
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  _$RecipesScreenStateCopyWith<_RecipesScreenState> get copyWith =>
-      __$RecipesScreenStateCopyWithImpl<_RecipesScreenState>(this, _$identity);
+  _$HomeStateCopyWith<_HomeState> get copyWith =>
+      __$HomeStateCopyWithImpl<_HomeState>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _RecipesScreenState &&
+            other is _HomeState &&
             (identical(other.categories, categories) ||
                 other.categories == categories) &&
             (identical(other.suggestions, suggestions) ||
@@ -149,17 +143,17 @@ class _RecipesScreenState implements RecipesScreenState {
 
   @override
   String toString() {
-    return 'RecipesScreenState(categories: $categories, suggestions: $suggestions)';
+    return 'HomeState(categories: $categories, suggestions: $suggestions)';
   }
 }
 
 /// @nodoc
-abstract mixin class _$RecipesScreenStateCopyWith<$Res>
-    implements $RecipesScreenStateCopyWith<$Res> {
-  factory _$RecipesScreenStateCopyWith(
-    _RecipesScreenState value,
-    $Res Function(_RecipesScreenState) _then,
-  ) = __$RecipesScreenStateCopyWithImpl;
+abstract mixin class _$HomeStateCopyWith<$Res>
+    implements $HomeStateCopyWith<$Res> {
+  factory _$HomeStateCopyWith(
+    _HomeState value,
+    $Res Function(_HomeState) _then,
+  ) = __$HomeStateCopyWithImpl;
   @override
   @useResult
   $Res call({
@@ -174,20 +168,19 @@ abstract mixin class _$RecipesScreenStateCopyWith<$Res>
 }
 
 /// @nodoc
-class __$RecipesScreenStateCopyWithImpl<$Res>
-    implements _$RecipesScreenStateCopyWith<$Res> {
-  __$RecipesScreenStateCopyWithImpl(this._self, this._then);
+class __$HomeStateCopyWithImpl<$Res> implements _$HomeStateCopyWith<$Res> {
+  __$HomeStateCopyWithImpl(this._self, this._then);
 
-  final _RecipesScreenState _self;
-  final $Res Function(_RecipesScreenState) _then;
+  final _HomeState _self;
+  final $Res Function(_HomeState) _then;
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $Res call({Object? categories = null, Object? suggestions = null}) {
     return _then(
-      _RecipesScreenState(
+      _HomeState(
         categories: null == categories
             ? _self.categories
             : categories // ignore: cast_nullable_to_non_nullable
@@ -200,7 +193,7 @@ class __$RecipesScreenStateCopyWithImpl<$Res>
     );
   }
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
@@ -210,7 +203,7 @@ class __$RecipesScreenStateCopyWithImpl<$Res>
     });
   }
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of HomeState
   /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_recipes_app/src/domain/domain.dart';
-import 'package:flutter_recipes_app/src/presentation/views/recipes/recipes_screen_state.dart';
+import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_state.dart';
 
-class RecipesScreenViewModel extends ChangeNotifier {
+class HomeViewController extends ChangeNotifier {
   final IRecipeRepository _recipeRepository;
   final FetchRecipeSuggestions _fetchRecipeSuggestions;
 
-  RecipesScreenViewModel(
+  HomeViewController(
     this._recipeRepository,
     this._fetchRecipeSuggestions,
   );
 
-  RecipesScreenState _state = const RecipesScreenState(
+  HomeState _state = const HomeState(
     categories: AsyncData(data: [], isLoading: true),
     suggestions: AsyncData(data: [], isLoading: true),
   );
-  RecipesScreenState get state => _state;
+  HomeState get state => _state;
 
-  /// Fetches all data for the recipes screen
+  /// Fetches all data for the home screen
   Future<void> fetchData() async {
     await Future.wait([fetchCategories(), fetchSuggestions()]);
   }
 
-  /// Fetches the categories for the recipes screen
+  /// Fetches the categories for the home screen
   Future<void> fetchCategories() async {
     _state = _state.copyWith(categories: _state.categories.copyWith(isLoading: true, hasError: false));
     notifyListeners();
@@ -37,7 +37,7 @@ class RecipesScreenViewModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  /// Fetches the suggestions for the recipes screen
+  /// Fetches the suggestions for the home screen
   Future<void> fetchSuggestions() async {
     _state = _state.copyWith(suggestions: _state.suggestions.copyWith(isLoading: true, hasError: false));
     notifyListeners();

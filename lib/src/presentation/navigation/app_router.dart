@@ -8,9 +8,9 @@ final appRouter = GoRouter(
   ],
   routes: <RouteBase>[
     GoRoute(
-      name: 'recipes',
+      name: 'home',
       path: '/',
-      builder: (context, state) => const RecipesScreen(),
+      builder: (context, state) => const HomeScreen(),
     ),
   ],
 );

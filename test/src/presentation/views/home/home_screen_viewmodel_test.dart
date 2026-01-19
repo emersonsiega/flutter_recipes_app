@@ -2,7 +2,7 @@ import 'package:dart_either/dart_either.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_recipes_app/src/data/data.dart';
 import 'package:flutter_recipes_app/src/domain/domain.dart';
-import 'package:flutter_recipes_app/src/presentation/views/recipes/recipes_screen_viewmodel.dart';
+import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_viewmodel.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -13,7 +13,7 @@ class MockRecipeRepository extends Mock implements IRecipeRepository {}
 class MockFetchRecipeSuggestions extends Mock implements FetchRecipeSuggestions {}
 
 void main() {
-  late RecipesScreenViewModel sut;
+  late HomeViewController sut;
   late MockRecipeRepository mockRecipeRepository;
   late MockFetchRecipeSuggestions mockFetchRecipeSuggestions;
   late Faker faker;
@@ -21,7 +21,7 @@ void main() {
   setUp(() {
     mockRecipeRepository = MockRecipeRepository();
     mockFetchRecipeSuggestions = MockFetchRecipeSuggestions();
-    sut = RecipesScreenViewModel(mockRecipeRepository, mockFetchRecipeSuggestions);
+    sut = HomeViewController(mockRecipeRepository, mockFetchRecipeSuggestions);
     faker = Faker();
   });
 

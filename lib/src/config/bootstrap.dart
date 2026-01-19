@@ -42,8 +42,8 @@ List<InheritedProvider> _setupProviders() {
         context.read<IRecipeRepository>(),
       ),
     ),
-    ChangeNotifierProvider<RecipesScreenViewModel>(
-      create: (context) => RecipesScreenViewModel(
+    ChangeNotifierProvider<HomeViewController>(
+      create: (context) => HomeViewController(
         context.read<IRecipeRepository>(),
         context.read<FetchRecipeSuggestions>(),
       ),
