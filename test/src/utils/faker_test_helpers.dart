@@ -71,4 +71,17 @@ extension TestHelpers on Faker {
       strMealThumb: internet.httpsUrl(),
     );
   }
+
+  /// Creates a [RecipeSummary] entity with optional parameters.
+  RecipeSummary createRecipeSummary({
+    String? id,
+    String? name,
+    Uri? thumbnail,
+  }) {
+    return Recipe.summary(
+      id: id ?? guid.guid(),
+      name: name ?? food.dish(),
+      thumbnail: thumbnail ?? Uri.parse(internet.httpsUrl()),
+    ) as RecipeSummary;
+  }
 }

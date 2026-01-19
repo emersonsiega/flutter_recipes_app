@@ -3,6 +3,7 @@ import 'package:flutter_recipes_app/src/config/constants.dart';
 import 'package:flutter_recipes_app/src/data/data.dart';
 import 'package:flutter_recipes_app/src/domain/domain.dart';
 import 'package:flutter_recipes_app/src/presentation/presentation.dart';
+import 'package:go_router/go_router.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ Future<void> bootstrap() async {
   final providers = _setupProviders();
 
   await LocaleSettings.useDeviceLocale();
+  GoRouter.optionURLReflectsImperativeAPIs = true;
 
   runApp(
     MultiProvider(
@@ -40,12 +42,6 @@ List<InheritedProvider> _setupProviders() {
     Provider<FetchRecipeSuggestions>(
       create: (context) => FetchRecipeSuggestions(
         context.read<IRecipeRepository>(),
-      ),
-    ),
-    ChangeNotifierProvider<HomeViewController>(
-      create: (context) => HomeViewController(
-        context.read<IRecipeRepository>(),
-        context.read<FetchRecipeSuggestions>(),
       ),
     ),
   ];

@@ -3,7 +3,8 @@
     "failures": {
         "generic": "An unexpected error occurred while loading the data. Please try again."
     },
-    "errorMessageBox": {
+    "actions": {
+        "backToHome": "Back to home",
         "retry": "Try again"
     },
     "recipes": {
@@ -22,5 +23,12 @@
         "easy": "Easy",
         "medium": "Medium",
         "hard": "Hard"
+    },
+    "category": {
+        "title": "{categoryName} Recipes",
+        "recipesCount": "{count} recipes found",
+        "noRecipesFound": "No recipes found",
+        "errorLoadingRecipes": "It was not possible to load the recipes. Please try again.",
+        "loadingRecipes": "Loading recipes..."
     }
 }

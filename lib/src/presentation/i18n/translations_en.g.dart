@@ -40,7 +40,7 @@ class TranslationsEn with BaseTranslations<AppLocale, Translations> implements T
 	// Translations
 	@override String get appTitle => 'Recipes App';
 	@override late final _TranslationsFailuresEn failures = _TranslationsFailuresEn._(_root);
-	@override late final _TranslationsErrorMessageBoxEn errorMessageBox = _TranslationsErrorMessageBoxEn._(_root);
+	@override late final _TranslationsActionsEn actions = _TranslationsActionsEn._(_root);
 	@override late final _TranslationsRecipesEn recipes = _TranslationsRecipesEn._(_root);
 	@override String difficultyLevel({required DifficultyLevel difficulty}) {
 		switch (difficulty) {
@@ -52,6 +52,7 @@ class TranslationsEn with BaseTranslations<AppLocale, Translations> implements T
 				return 'Hard';
 		}
 	}
+	@override late final _TranslationsCategoryEn category = _TranslationsCategoryEn._(_root);
 }
 
 // Path: failures
@@ -64,13 +65,14 @@ class _TranslationsFailuresEn implements TranslationsFailuresPtBr {
 	@override String get generic => 'An unexpected error occurred while loading the data. Please try again.';
 }
 
-// Path: errorMessageBox
-class _TranslationsErrorMessageBoxEn implements TranslationsErrorMessageBoxPtBr {
-	_TranslationsErrorMessageBoxEn._(this._root);
+// Path: actions
+class _TranslationsActionsEn implements TranslationsActionsPtBr {
+	_TranslationsActionsEn._(this._root);
 
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
+	@override String get backToHome => 'Back to home';
 	@override String get retry => 'Try again';
 }
 
@@ -93,6 +95,20 @@ class _TranslationsRecipesEn implements TranslationsRecipesPtBr {
 	@override String get errorLoadingCategories => 'It was not possible to load the categories. Please try again.';
 }
 
+// Path: category
+class _TranslationsCategoryEn implements TranslationsCategoryPtBr {
+	_TranslationsCategoryEn._(this._root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required Object categoryName}) => '${categoryName} Recipes';
+	@override String recipesCount({required Object count}) => '${count} recipes found';
+	@override String get noRecipesFound => 'No recipes found';
+	@override String get errorLoadingRecipes => 'It was not possible to load the recipes. Please try again.';
+	@override String get loadingRecipes => 'Loading recipes...';
+}
+
 /// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -103,7 +119,8 @@ extension on TranslationsEn {
 		return switch (path) {
 			'appTitle' => 'Recipes App',
 			'failures.generic' => 'An unexpected error occurred while loading the data. Please try again.',
-			'errorMessageBox.retry' => 'Try again',
+			'actions.backToHome' => 'Back to home',
+			'actions.retry' => 'Try again',
 			'recipes.title' => 'Recipe Finder',
 			'recipes.searchPlaceholder' => 'Search for recipes...',
 			'recipes.categories' => 'Categories',
@@ -115,6 +132,11 @@ extension on TranslationsEn {
 			'recipes.errorLoadingSuggestions' => 'It was not possible to load the suggestions. Please try again.',
 			'recipes.errorLoadingCategories' => 'It was not possible to load the categories. Please try again.',
 			'difficultyLevel' => ({required DifficultyLevel difficulty}) { switch (difficulty) { case DifficultyLevel.easy: return 'Easy'; case DifficultyLevel.medium: return 'Medium'; case DifficultyLevel.hard: return 'Hard'; } }, 
+			'category.title' => ({required Object categoryName}) => '${categoryName} Recipes',
+			'category.recipesCount' => ({required Object count}) => '${count} recipes found',
+			'category.noRecipesFound' => 'No recipes found',
+			'category.errorLoadingRecipes' => 'It was not possible to load the recipes. Please try again.',
+			'category.loadingRecipes' => 'Loading recipes...',
 			_ => null,
 		};
 	}

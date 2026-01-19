@@ -37,7 +37,7 @@ class ErrorMessageBox extends StatelessWidget {
                 child: TextButton(
                   onPressed: onRetry,
                   child: Text(
-                    retryLabel ?? t.errorMessageBox.retry,
+                    retryLabel ?? t.actions.retry,
                     style: TextStyle(color: context.colorScheme.error),
                   ),
                 ),

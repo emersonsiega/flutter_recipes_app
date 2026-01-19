@@ -23,7 +23,7 @@ extension CategoryModelExtension on CategoryModel {
     return Category(
       id: idCategory,
       name: strCategory,
-      description: strCategoryDescription,
+      description: strCategoryDescription.trim(),
       imageUrl: Uri.parse(strCategoryThumb),
     );
   }

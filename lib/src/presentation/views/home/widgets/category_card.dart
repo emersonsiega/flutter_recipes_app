@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_recipes_app/src/domain/domain.dart';
 import 'package:flutter_recipes_app/src/presentation/extensions/extensions.dart';
 import 'package:flutter_recipes_app/src/presentation/widgets/widgets.dart';
+import 'package:go_router/go_router.dart';
 
 class CategoryCard extends StatelessWidget {
   final Category category;
@@ -11,7 +12,7 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        //TODO: Navigate to the category recipes screen
+        context.pushNamed('category', extra: category);
       },
       child: Card(
         elevation: 2,

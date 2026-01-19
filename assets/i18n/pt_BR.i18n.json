@@ -3,7 +3,8 @@
     "failures": {
         "generic": "Ocorreu um erro inesperado ao carregar os dados. Por favor, tente novamente."
     },
-    "errorMessageBox": {
+    "actions": {
+        "backToHome": "Voltar ao início",
         "retry": "Tentar novamente"
     },
     "recipes": {
@@ -22,5 +23,12 @@
         "easy": "Fácil",
         "medium": "Média",
         "hard": "Difícil"
+    },
+    "category": {
+        "title": "{categoryName}",
+        "recipesCount": "{count} receitas encontradas",
+        "noRecipesFound": "Nenhuma receita encontrada",
+        "errorLoadingRecipes": "Não foi possível carregar as receitas. Por favor, tente novamente.",
+        "loadingRecipes": "Carregando receitas..."
     }
 }

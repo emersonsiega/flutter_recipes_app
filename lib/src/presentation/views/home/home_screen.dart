@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(16),
             child: ErrorMessageBox(
               onRetry: context.read<HomeViewController>().fetchCategories,
-              retryLabel: t.errorMessageBox.retry,
+              retryLabel: t.actions.retry,
               message: t.recipes.errorLoadingCategories,
             ),
           ),
@@ -114,7 +114,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         _ => Padding(
           padding: EdgeInsets.all(16),
-          child: Center(child: Text(t.recipes.noCategoriesFound)),
+          child: Center(
+            child: Text(
+              t.recipes.noCategoriesFound,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.colorScheme.onSurface.withValues(alpha: .7),
+              ),
+            ),
+          ),
         ),
       },
     ];
@@ -136,7 +143,7 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: const EdgeInsets.all(16),
             child: ErrorMessageBox(
               onRetry: context.read<HomeViewController>().fetchSuggestions,
-              retryLabel: t.errorMessageBox.retry,
+              retryLabel: t.actions.retry,
               message: t.recipes.errorLoadingSuggestions,
             ),
           ),
@@ -161,7 +168,14 @@ class _HomeScreenState extends State<HomeScreen> {
         ),
         _ => Padding(
           padding: EdgeInsets.all(16),
-          child: Center(child: Text(t.recipes.noSuggestionsFound)),
+          child: Center(
+            child: Text(
+              t.recipes.noSuggestionsFound,
+              style: context.textTheme.bodyMedium?.copyWith(
+                color: context.colorScheme.onSurface.withValues(alpha: .7),
+              ),
+            ),
+          ),
         ),
       },
     ];

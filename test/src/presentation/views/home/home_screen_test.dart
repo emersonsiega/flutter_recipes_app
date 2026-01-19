@@ -113,7 +113,7 @@ void main() {
 
           // Assert
           expect(find.byType(ErrorMessageBox), findsOneWidget);
-          expect(find.text(t.errorMessageBox.retry), findsOneWidget);
+          expect(find.text(t.actions.retry), findsOneWidget);
         });
 
         testWidgets('should call fetchCategories when retry button is tapped', (tester) async {
@@ -132,7 +132,7 @@ void main() {
           await tester.pump();
           await tester.pump(const Duration(milliseconds: 100));
 
-          final retryButton = find.text(t.errorMessageBox.retry);
+          final retryButton = find.text(t.actions.retry);
           expect(retryButton, findsOneWidget);
           await tester.tap(retryButton);
           await tester.pump();
@@ -229,7 +229,7 @@ void main() {
 
         // Assert
         expect(find.byType(ErrorMessageBox), findsOneWidget);
-        expect(find.text(t.errorMessageBox.retry), findsOneWidget);
+        expect(find.text(t.actions.retry), findsOneWidget);
       });
 
       testWidgets('should call fetchSuggestions when retry button is tapped', (tester) async {
@@ -246,11 +246,11 @@ void main() {
         // Act
         await tester.pumpWidget(createTestWidget(mockViewModel));
         await tester.pump();
-        await tester.pump(const Duration(milliseconds: 100));
+          await tester.pump(const Duration(milliseconds: 100));
 
-        final retryButton = find.text(t.errorMessageBox.retry);
-        expect(retryButton, findsOneWidget);
-        await tester.tap(retryButton);
+          final retryButton = find.text(t.actions.retry);
+          expect(retryButton, findsOneWidget);
+          await tester.tap(retryButton);
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
