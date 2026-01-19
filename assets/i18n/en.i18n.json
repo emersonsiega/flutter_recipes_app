@@ -30,5 +30,12 @@
         "noRecipesFound": "No recipes found",
         "errorLoadingRecipes": "It was not possible to load the recipes. Please try again.",
         "loadingRecipes": "Loading recipes..."
+    },
+    "recipeSearch": {
+        "title": "Search results for \"{name}\"",
+        "recipesCount": "{count} recipes found",
+        "noRecipesFound": "No recipes found",
+        "errorLoadingRecipes": "It was not possible to search the recipes. Please try again.",
+        "loadingRecipes": "Searching for recipes..."
     }
 }

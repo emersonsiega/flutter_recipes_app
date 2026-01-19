@@ -61,6 +61,7 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	}
 
 	late final TranslationsCategoryPtBr category = TranslationsCategoryPtBr._(_root);
+	late final TranslationsRecipeSearchPtBr recipeSearch = TranslationsRecipeSearchPtBr._(_root);
 }
 
 // Path: failures
@@ -153,6 +154,30 @@ class TranslationsCategoryPtBr {
 	String get loadingRecipes => 'Carregando receitas...';
 }
 
+// Path: recipeSearch
+class TranslationsRecipeSearchPtBr {
+	TranslationsRecipeSearchPtBr._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// pt-BR: 'Resultados da busca por "{name}"'
+	String title({required Object name}) => 'Resultados da busca por "${name}"';
+
+	/// pt-BR: '{count} receitas encontradas'
+	String recipesCount({required Object count}) => '${count} receitas encontradas';
+
+	/// pt-BR: 'Nenhuma receita encontrada'
+	String get noRecipesFound => 'Nenhuma receita encontrada';
+
+	/// pt-BR: 'Não foi possível buscar as receitas. Por favor, tente novamente.'
+	String get errorLoadingRecipes => 'Não foi possível buscar as receitas. Por favor, tente novamente.';
+
+	/// pt-BR: 'Buscando receitas...'
+	String get loadingRecipes => 'Buscando receitas...';
+}
+
 /// The flat map containing all translations for locale <pt-BR>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -181,6 +206,11 @@ extension on Translations {
 			'category.noRecipesFound' => 'Nenhuma receita encontrada',
 			'category.errorLoadingRecipes' => 'Não foi possível carregar as receitas. Por favor, tente novamente.',
 			'category.loadingRecipes' => 'Carregando receitas...',
+			'recipeSearch.title' => ({required Object name}) => 'Resultados da busca por "${name}"',
+			'recipeSearch.recipesCount' => ({required Object count}) => '${count} receitas encontradas',
+			'recipeSearch.noRecipesFound' => 'Nenhuma receita encontrada',
+			'recipeSearch.errorLoadingRecipes' => 'Não foi possível buscar as receitas. Por favor, tente novamente.',
+			'recipeSearch.loadingRecipes' => 'Buscando receitas...',
 			_ => null,
 		};
 	}

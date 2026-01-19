@@ -30,6 +30,8 @@ class _SearchBarState extends State<SearchBar> {
       child: TextField(
         controller: _controller,
         style: TextStyle(color: context.colorScheme.onSurface),
+        keyboardType: .text,
+        textInputAction: .search,
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.search, size: 20),
           hintText: t.recipes.searchPlaceholder,
@@ -40,19 +42,19 @@ class _SearchBarState extends State<SearchBar> {
                 visible: _controller.text.isNotEmpty,
                 child: GestureDetector(
                   behavior: .opaque,
-                  onTap: _controller.text.isNotEmpty
-                      ? () {
-                          _controller.clear();
-                          widget.onSubmitted('');
-                        }
-                      : null,
+                  onTap: _controller.text.isNotEmpty ? _controller.clear : null,
                   child: Icon(Icons.clear, size: 20, color: context.colorScheme.onSurface),
                 ),
               );
             },
           ),
         ),
-        onSubmitted: widget.onSubmitted,
+        onSubmitted: (value) {
+          if (value.trim().isEmpty) return;
+
+          _controller.clear();
+          widget.onSubmitted(value.trim());
+        },
       ),
     );
   }

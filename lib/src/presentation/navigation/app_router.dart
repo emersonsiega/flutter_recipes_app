@@ -21,6 +21,23 @@ final appRouter = GoRouter(
       ),
     ),
     GoRoute(
+      name: 'recipeSearch',
+      path: '/recipe-search/:name',
+      redirect: (context, state) {
+        final name = state.pathParameters['name'] ?? '';
+        if (name.isEmpty) return '/';
+        return null;
+      },
+      builder: (context, state) {
+        return ChangeNotifierProvider<RecipeSearchScreenViewModel>(
+          create: (context) => RecipeSearchScreenViewModel(
+            context.read<IRecipeRepository>(),
+          ),
+          child: RecipeSearchScreen(name: state.pathParameters['name'] ?? ''),
+        );
+      },
+    ),
+    GoRoute(
       name: 'category',
       path: '/category',
       redirect: (context, state) {

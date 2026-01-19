@@ -53,6 +53,7 @@ class TranslationsEn with BaseTranslations<AppLocale, Translations> implements T
 		}
 	}
 	@override late final _TranslationsCategoryEn category = _TranslationsCategoryEn._(_root);
+	@override late final _TranslationsRecipeSearchEn recipeSearch = _TranslationsRecipeSearchEn._(_root);
 }
 
 // Path: failures
@@ -109,6 +110,20 @@ class _TranslationsCategoryEn implements TranslationsCategoryPtBr {
 	@override String get loadingRecipes => 'Loading recipes...';
 }
 
+// Path: recipeSearch
+class _TranslationsRecipeSearchEn implements TranslationsRecipeSearchPtBr {
+	_TranslationsRecipeSearchEn._(this._root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String title({required Object name}) => 'Search results for "${name}"';
+	@override String recipesCount({required Object count}) => '${count} recipes found';
+	@override String get noRecipesFound => 'No recipes found';
+	@override String get errorLoadingRecipes => 'It was not possible to search the recipes. Please try again.';
+	@override String get loadingRecipes => 'Searching for recipes...';
+}
+
 /// The flat map containing all translations for locale <en>.
 /// Only for edge cases! For simple maps, use the map function of this library.
 ///
@@ -137,6 +152,11 @@ extension on TranslationsEn {
 			'category.noRecipesFound' => 'No recipes found',
 			'category.errorLoadingRecipes' => 'It was not possible to load the recipes. Please try again.',
 			'category.loadingRecipes' => 'Loading recipes...',
+			'recipeSearch.title' => ({required Object name}) => 'Search results for "${name}"',
+			'recipeSearch.recipesCount' => ({required Object count}) => '${count} recipes found',
+			'recipeSearch.noRecipesFound' => 'No recipes found',
+			'recipeSearch.errorLoadingRecipes' => 'It was not possible to search the recipes. Please try again.',
+			'recipeSearch.loadingRecipes' => 'Searching for recipes...',
 			_ => null,
 		};
 	}

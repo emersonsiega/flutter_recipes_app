@@ -8,7 +8,7 @@ A new Flutter project.
 - [X] List categories
 - [X] List suggestions
 - [X] List category recipes
-- [ ] Search recipes
+- [X] Search recipes
 - [ ] Show recipe details
 
 Maybe: 

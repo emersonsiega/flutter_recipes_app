@@ -6,6 +6,7 @@ import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_stat
 import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_viewmodel.dart';
 import 'package:flutter_recipes_app/src/presentation/views/home/widgets/widgets.dart';
 import 'package:flutter_recipes_app/src/presentation/widgets/widgets.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,51 +30,43 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       backgroundColor: context.colorScheme.surfaceContainer,
       body: SafeArea(
-        child: Builder(
-          builder: (context) {
-            final categories = context.select<HomeViewController, AsyncData<List<Category>>>(
-              (viewModel) => viewModel.state.categories,
-            );
-            final suggestions = context.select<HomeViewController, AsyncData<List<Recipe>>>(
-              (viewModel) => viewModel.state.suggestions,
-            );
-
-            return CustomScrollView(
-              slivers: [
-                SliverAppBar(
-                  title: Text(
-                    t.recipes.title,
-                    style: context.textTheme.headlineSmall?.copyWith(fontWeight: .bold),
-                  ),
-                  centerTitle: false,
-                  backgroundColor: Colors.transparent,
-                  bottom: SearchBar(
-                    onSubmitted: (value) {
-                      //TODO Go to search screen
-                    },
-                  ),
+        child: CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Text(
+                t.recipes.title,
+                style: context.textTheme.headlineSmall?.copyWith(fontWeight: .bold),
+              ),
+              centerTitle: false,
+              backgroundColor: Colors.transparent,
+              bottom: SearchBar(
+                onSubmitted: (value) {
+                  context.pushNamed('recipeSearch', pathParameters: {'name': value});
+                },
+              ),
+            ),
+            SliverPadding(
+              padding: const EdgeInsets.only(top: 32, bottom: 16),
+              sliver: SliverList(
+                delegate: SliverChildListDelegate(
+                  [
+                    ..._buildSuggestions(context),
+                    const SizedBox(height: 32),
+                    ..._buildCategories(context),
+                  ],
                 ),
-                SliverPadding(
-                  padding: const EdgeInsets.only(top: 32, bottom: 16),
-                  sliver: SliverList(
-                    delegate: SliverChildListDelegate(
-                      [
-                        ..._buildSuggestions(suggestions),
-                        const SizedBox(height: 32),
-                        ..._buildCategories(categories),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            );
-          },
+              ),
+            ),
+          ],
         ),
       ),
     );
   }
 
-  List<Widget> _buildCategories(AsyncData<List<Category>> categories) {
+  List<Widget> _buildCategories(BuildContext context) {
+    final categories = context.select<HomeViewController, AsyncData<List<Category>>>(
+      (viewModel) => viewModel.state.categories,
+    );
     return <Widget>[
       Padding(
         padding: EdgeInsets.fromLTRB(16, 16, 16, 32),
@@ -127,7 +120,10 @@ class _HomeScreenState extends State<HomeScreen> {
     ];
   }
 
-  List<Widget> _buildSuggestions(AsyncData<List<Recipe>> suggestions) {
+  List<Widget> _buildSuggestions(BuildContext context) {
+    final suggestions = context.select<HomeViewController, AsyncData<List<Recipe>>>(
+      (viewModel) => viewModel.state.suggestions,
+    );
     return [
       Padding(
         padding: EdgeInsets.fromLTRB(16, 16, 16, 32),

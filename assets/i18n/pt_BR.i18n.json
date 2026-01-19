@@ -30,5 +30,12 @@
         "noRecipesFound": "Nenhuma receita encontrada",
         "errorLoadingRecipes": "Não foi possível carregar as receitas. Por favor, tente novamente.",
         "loadingRecipes": "Carregando receitas..."
+    },
+    "recipeSearch": {
+        "title": "Resultados da busca por \"{name}\"",
+        "recipesCount": "{count} receitas encontradas",
+        "noRecipesFound": "Nenhuma receita encontrada",
+        "errorLoadingRecipes": "Não foi possível buscar as receitas. Por favor, tente novamente.",
+        "loadingRecipes": "Buscando receitas..."
     }
 }
