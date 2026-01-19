@@ -7,11 +7,20 @@
         "retry": "Tentar novamente"
     },
     "recipes": {
-        "title": "Receitas",
-        "searchPlaceholder": "Pesquisar receita por nome",
+        "title": "Buscador de receitas",
+        "searchPlaceholder": "Pesquisar receitas...",
         "categories": "Categorias",
         "noCategoriesFound": "Nenhuma categoria encontrada",
-        "searching": "Buscando...",
-        "retry": "Recarregar lista"
+        "suggestions": "Sugestões",
+        "noSuggestionsFound": "Nenhuma sugestão encontrada",
+        "loadingSuggestions": "Carregando sugestões...",
+        "loadingCategories": "Carregando categorias...",
+        "errorLoadingSuggestions": "Não foi possível carregar as sugestões. Por favor, tente novamente.",
+        "errorLoadingCategories": "Não foi possível carregar as categorias. Por favor, tente novamente."
+    },
+    "difficultyLevel(context=DifficultyLevel, param=difficulty)": {
+        "easy": "Fácil",
+        "medium": "Média",
+        "hard": "Difícil"
     }
 }

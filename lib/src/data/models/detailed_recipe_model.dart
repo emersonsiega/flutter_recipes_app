@@ -148,6 +148,11 @@ extension DetailedRecipeModelExtension on DetailedRecipeModel {
           category: category,
           tags: tags,
           video: strYoutube != null && strYoutube!.isNotEmpty ? Uri.tryParse(strYoutube!) : null,
+          difficulty: ingredients.length <= 5
+              ? DifficultyLevel.easy
+              : ingredients.length <= 10
+              ? DifficultyLevel.medium
+              : DifficultyLevel.hard,
         )
         as DetailedRecipe;
   }

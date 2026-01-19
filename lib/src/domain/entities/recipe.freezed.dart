@@ -192,6 +192,7 @@ class DetailedRecipe extends Recipe {
     required this.category,
     final List<String> tags = const [],
     this.video,
+    required this.difficulty,
   }) : _ingredients = ingredients,
        _instructions = instructions,
        _tags = tags,
@@ -228,6 +229,7 @@ class DetailedRecipe extends Recipe {
   }
 
   final Uri? video;
+  final DifficultyLevel difficulty;
 
   /// Create a copy of Recipe
   /// with the given fields replaced by the non-null parameter values.
@@ -258,7 +260,9 @@ class DetailedRecipe extends Recipe {
             (identical(other.category, category) ||
                 other.category == category) &&
             const DeepCollectionEquality().equals(other._tags, _tags) &&
-            (identical(other.video, video) || other.video == video));
+            (identical(other.video, video) || other.video == video) &&
+            (identical(other.difficulty, difficulty) ||
+                other.difficulty == difficulty));
   }
 
   @override
@@ -273,11 +277,12 @@ class DetailedRecipe extends Recipe {
     category,
     const DeepCollectionEquality().hash(_tags),
     video,
+    difficulty,
   );
 
   @override
   String toString() {
-    return 'Recipe.detailed(id: $id, name: $name, thumbnail: $thumbnail, area: $area, ingredients: $ingredients, instructions: $instructions, category: $category, tags: $tags, video: $video)';
+    return 'Recipe.detailed(id: $id, name: $name, thumbnail: $thumbnail, area: $area, ingredients: $ingredients, instructions: $instructions, category: $category, tags: $tags, video: $video, difficulty: $difficulty)';
   }
 }
 
@@ -300,6 +305,7 @@ abstract mixin class $DetailedRecipeCopyWith<$Res>
     Category category,
     List<String> tags,
     Uri? video,
+    DifficultyLevel difficulty,
   });
 
   $CategoryCopyWith<$Res> get category;
@@ -327,6 +333,7 @@ class _$DetailedRecipeCopyWithImpl<$Res>
     Object? category = null,
     Object? tags = null,
     Object? video = freezed,
+    Object? difficulty = null,
   }) {
     return _then(
       DetailedRecipe(
@@ -366,6 +373,10 @@ class _$DetailedRecipeCopyWithImpl<$Res>
             ? _self.video
             : video // ignore: cast_nullable_to_non_nullable
                   as Uri?,
+        difficulty: null == difficulty
+            ? _self.difficulty
+            : difficulty // ignore: cast_nullable_to_non_nullable
+                  as DifficultyLevel,
       ),
     );
   }

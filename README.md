@@ -6,9 +6,9 @@ A new Flutter project.
 ### TODO
 
 - [X] List categories
-- [ ] List suggestions
-- [ ] Search recipes
+- [X] List suggestions
 - [ ] List category recipes
+- [ ] Search recipes
 - [ ] Show recipe details
 
 Maybe: 

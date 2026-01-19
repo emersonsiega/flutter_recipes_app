@@ -5,9 +5,10 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "flutter_recipes_app",
+            "name": "Flutter Recipes App",
             "request": "launch",
-            "type": "dart"
+            "type": "dart",
+            "args": ["-t", "lib/main.dart"]
         },
         {
             "name": "flutter_recipes_app (profile mode)",

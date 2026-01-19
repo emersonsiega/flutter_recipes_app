@@ -4,19 +4,18 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'recipes_screen_state.freezed.dart';
 
 @freezed
-sealed class RecipesScreenState with _$RecipesScreenState {
-  const RecipesScreenState._();
+abstract class RecipesScreenState with _$RecipesScreenState {
+  const factory RecipesScreenState({
+    @Default(AsyncData<List<Category>>(data: [])) AsyncData<List<Category>> categories,
+    @Default(AsyncData<List<Recipe>>(data: [])) AsyncData<List<Recipe>> suggestions,
+  }) = _RecipesScreenState;
+}
 
-  const factory RecipesScreenState.idle() = IdleState;
-
-  const factory RecipesScreenState.loading() = LoadingState;
-
-  const factory RecipesScreenState.success({
-    @Default([]) List<Category> categories,
-    @Default(false) bool searching,
-    @Default('') String query,
-    @Default([]) List<RecipeSummary> queryResult,
-  }) = SuccessState;
-
-  const factory RecipesScreenState.error() = ErrorState;
+@freezed
+abstract class AsyncData<T> with _$AsyncData<T> {
+  const factory AsyncData({
+    required T data,
+    @Default(false) bool isLoading,
+    @Default(false) bool hasError,
+  }) = _AsyncData;
 }

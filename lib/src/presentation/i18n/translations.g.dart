@@ -3,21 +3,23 @@
 /// Source: assets/i18n
 /// To regenerate, run: `dart run slang`
 ///
-/// Locales: 1
-/// Strings: 9
+/// Locales: 2
+/// Strings: 32 (16 per locale)
 ///
-/// Built on 2026-01-17 at 20:27 UTC
+/// Built on 2026-01-19 at 16:19 UTC
 
 // coverage:ignore-file
 // ignore_for_file: type=lint, unused_import
 // dart format off
 
 import 'package:flutter/widgets.dart';
+import 'package:flutter_recipes_app/src/domain/domain.dart';
 import 'package:intl/intl.dart';
 import 'package:slang/generated.dart';
 import 'package:slang_flutter/slang_flutter.dart';
 export 'package:slang_flutter/slang_flutter.dart';
 
+import 'translations_en.g.dart' deferred as l_en;
 part 'translations_pt_BR.g.dart';
 
 /// Supported locales.
@@ -27,7 +29,8 @@ part 'translations_pt_BR.g.dart';
 /// - Locale locale = AppLocale.ptBr.flutterLocale // get flutter locale from enum
 /// - if (LocaleSettings.currentLocale == AppLocale.ptBr) // locale check
 enum AppLocale with BaseAppLocale<AppLocale, Translations> {
-	ptBr(languageCode: 'pt', countryCode: 'BR');
+	ptBr(languageCode: 'pt', countryCode: 'BR'),
+	en(languageCode: 'en');
 
 	const AppLocale({
 		required this.languageCode,
@@ -52,6 +55,13 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 					cardinalResolver: cardinalResolver,
 					ordinalResolver: ordinalResolver,
 				);
+			case AppLocale.en:
+				await l_en.loadLibrary();
+				return l_en.TranslationsEn(
+					overrides: overrides,
+					cardinalResolver: cardinalResolver,
+					ordinalResolver: ordinalResolver,
+				);
 		}
 	}
 
@@ -64,6 +74,12 @@ enum AppLocale with BaseAppLocale<AppLocale, Translations> {
 		switch (this) {
 			case AppLocale.ptBr:
 				return TranslationsPtBr(
+					overrides: overrides,
+					cardinalResolver: cardinalResolver,
+					ordinalResolver: ordinalResolver,
+				);
+			case AppLocale.en:
+				return l_en.TranslationsEn(
 					overrides: overrides,
 					cardinalResolver: cardinalResolver,
 					ordinalResolver: ordinalResolver,

@@ -47,6 +47,18 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 	late final TranslationsFailuresPtBr failures = TranslationsFailuresPtBr._(_root);
 	late final TranslationsErrorMessageBoxPtBr errorMessageBox = TranslationsErrorMessageBoxPtBr._(_root);
 	late final TranslationsRecipesPtBr recipes = TranslationsRecipesPtBr._(_root);
+
+	/// pt-BR: '(easy) {Fácil} (medium) {Média} (hard) {Difícil}'
+	String difficultyLevel({required DifficultyLevel difficulty}) {
+		switch (difficulty) {
+			case DifficultyLevel.easy:
+				return 'Fácil';
+			case DifficultyLevel.medium:
+				return 'Média';
+			case DifficultyLevel.hard:
+				return 'Difícil';
+		}
+	}
 }
 
 // Path: failures
@@ -81,11 +93,11 @@ class TranslationsRecipesPtBr {
 
 	// Translations
 
-	/// pt-BR: 'Receitas'
-	String get title => 'Receitas';
+	/// pt-BR: 'Buscador de receitas'
+	String get title => 'Buscador de receitas';
 
-	/// pt-BR: 'Pesquisar receita por nome'
-	String get searchPlaceholder => 'Pesquisar receita por nome';
+	/// pt-BR: 'Pesquisar receitas...'
+	String get searchPlaceholder => 'Pesquisar receitas...';
 
 	/// pt-BR: 'Categorias'
 	String get categories => 'Categorias';
@@ -93,11 +105,23 @@ class TranslationsRecipesPtBr {
 	/// pt-BR: 'Nenhuma categoria encontrada'
 	String get noCategoriesFound => 'Nenhuma categoria encontrada';
 
-	/// pt-BR: 'Buscando...'
-	String get searching => 'Buscando...';
+	/// pt-BR: 'Sugestões'
+	String get suggestions => 'Sugestões';
 
-	/// pt-BR: 'Recarregar lista'
-	String get retry => 'Recarregar lista';
+	/// pt-BR: 'Nenhuma sugestão encontrada'
+	String get noSuggestionsFound => 'Nenhuma sugestão encontrada';
+
+	/// pt-BR: 'Carregando sugestões...'
+	String get loadingSuggestions => 'Carregando sugestões...';
+
+	/// pt-BR: 'Carregando categorias...'
+	String get loadingCategories => 'Carregando categorias...';
+
+	/// pt-BR: 'Não foi possível carregar as sugestões. Por favor, tente novamente.'
+	String get errorLoadingSuggestions => 'Não foi possível carregar as sugestões. Por favor, tente novamente.';
+
+	/// pt-BR: 'Não foi possível carregar as categorias. Por favor, tente novamente.'
+	String get errorLoadingCategories => 'Não foi possível carregar as categorias. Por favor, tente novamente.';
 }
 
 /// The flat map containing all translations for locale <pt-BR>.
@@ -111,12 +135,17 @@ extension on Translations {
 			'appTitle' => 'Receitas App',
 			'failures.generic' => 'Ocorreu um erro inesperado ao carregar os dados. Por favor, tente novamente.',
 			'errorMessageBox.retry' => 'Tentar novamente',
-			'recipes.title' => 'Receitas',
-			'recipes.searchPlaceholder' => 'Pesquisar receita por nome',
+			'recipes.title' => 'Buscador de receitas',
+			'recipes.searchPlaceholder' => 'Pesquisar receitas...',
 			'recipes.categories' => 'Categorias',
 			'recipes.noCategoriesFound' => 'Nenhuma categoria encontrada',
-			'recipes.searching' => 'Buscando...',
-			'recipes.retry' => 'Recarregar lista',
+			'recipes.suggestions' => 'Sugestões',
+			'recipes.noSuggestionsFound' => 'Nenhuma sugestão encontrada',
+			'recipes.loadingSuggestions' => 'Carregando sugestões...',
+			'recipes.loadingCategories' => 'Carregando categorias...',
+			'recipes.errorLoadingSuggestions' => 'Não foi possível carregar as sugestões. Por favor, tente novamente.',
+			'recipes.errorLoadingCategories' => 'Não foi possível carregar as categorias. Por favor, tente novamente.',
+			'difficultyLevel' => ({required DifficultyLevel difficulty}) { switch (difficulty) { case DifficultyLevel.easy: return 'Fácil'; case DifficultyLevel.medium: return 'Média'; case DifficultyLevel.hard: return 'Difícil'; } }, 
 			_ => null,
 		};
 	}

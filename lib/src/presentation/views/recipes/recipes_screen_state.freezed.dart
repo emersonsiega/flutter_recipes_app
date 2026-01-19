@@ -13,191 +13,296 @@ T _$identity<T>(T value) => value;
 
 /// @nodoc
 mixin _$RecipesScreenState {
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is RecipesScreenState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'RecipesScreenState()';
-  }
-}
-
-/// @nodoc
-class $RecipesScreenStateCopyWith<$Res> {
-  $RecipesScreenStateCopyWith(
-    RecipesScreenState _,
-    $Res Function(RecipesScreenState) __,
-  );
-}
-
-/// @nodoc
-
-class IdleState extends RecipesScreenState {
-  const IdleState() : super._();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is IdleState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'RecipesScreenState.idle()';
-  }
-}
-
-/// @nodoc
-
-class LoadingState extends RecipesScreenState {
-  const LoadingState() : super._();
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is LoadingState);
-  }
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-
-  @override
-  String toString() {
-    return 'RecipesScreenState.loading()';
-  }
-}
-
-/// @nodoc
-
-class SuccessState extends RecipesScreenState {
-  const SuccessState({
-    final List<Category> categories = const [],
-    this.searching = false,
-    this.query = '',
-    final List<RecipeSummary> queryResult = const [],
-  }) : _categories = categories,
-       _queryResult = queryResult,
-       super._();
-
-  final List<Category> _categories;
-  @JsonKey()
-  List<Category> get categories {
-    if (_categories is EqualUnmodifiableListView) return _categories;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_categories);
-  }
-
-  @JsonKey()
-  final bool searching;
-  @JsonKey()
-  final String query;
-  final List<RecipeSummary> _queryResult;
-  @JsonKey()
-  List<RecipeSummary> get queryResult {
-    if (_queryResult is EqualUnmodifiableListView) return _queryResult;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_queryResult);
-  }
+  AsyncData<List<Category>> get categories;
+  AsyncData<List<Recipe>> get suggestions;
 
   /// Create a copy of RecipesScreenState
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   @pragma('vm:prefer-inline')
-  $SuccessStateCopyWith<SuccessState> get copyWith =>
-      _$SuccessStateCopyWithImpl<SuccessState>(this, _$identity);
+  $RecipesScreenStateCopyWith<RecipesScreenState> get copyWith =>
+      _$RecipesScreenStateCopyWithImpl<RecipesScreenState>(
+        this as RecipesScreenState,
+        _$identity,
+      );
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is SuccessState &&
-            const DeepCollectionEquality().equals(
-              other._categories,
-              _categories,
-            ) &&
-            (identical(other.searching, searching) ||
-                other.searching == searching) &&
-            (identical(other.query, query) || other.query == query) &&
-            const DeepCollectionEquality().equals(
-              other._queryResult,
-              _queryResult,
-            ));
+            other is RecipesScreenState &&
+            (identical(other.categories, categories) ||
+                other.categories == categories) &&
+            (identical(other.suggestions, suggestions) ||
+                other.suggestions == suggestions));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, categories, suggestions);
+
+  @override
+  String toString() {
+    return 'RecipesScreenState(categories: $categories, suggestions: $suggestions)';
+  }
+}
+
+/// @nodoc
+abstract mixin class $RecipesScreenStateCopyWith<$Res> {
+  factory $RecipesScreenStateCopyWith(
+    RecipesScreenState value,
+    $Res Function(RecipesScreenState) _then,
+  ) = _$RecipesScreenStateCopyWithImpl;
+  @useResult
+  $Res call({
+    AsyncData<List<Category>> categories,
+    AsyncData<List<Recipe>> suggestions,
+  });
+
+  $AsyncDataCopyWith<List<Category>, $Res> get categories;
+  $AsyncDataCopyWith<List<Recipe>, $Res> get suggestions;
+}
+
+/// @nodoc
+class _$RecipesScreenStateCopyWithImpl<$Res>
+    implements $RecipesScreenStateCopyWith<$Res> {
+  _$RecipesScreenStateCopyWithImpl(this._self, this._then);
+
+  final RecipesScreenState _self;
+  final $Res Function(RecipesScreenState) _then;
+
+  /// Create a copy of RecipesScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({Object? categories = null, Object? suggestions = null}) {
+    return _then(
+      _self.copyWith(
+        categories: null == categories
+            ? _self.categories
+            : categories // ignore: cast_nullable_to_non_nullable
+                  as AsyncData<List<Category>>,
+        suggestions: null == suggestions
+            ? _self.suggestions
+            : suggestions // ignore: cast_nullable_to_non_nullable
+                  as AsyncData<List<Recipe>>,
+      ),
+    );
+  }
+
+  /// Create a copy of RecipesScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AsyncDataCopyWith<List<Category>, $Res> get categories {
+    return $AsyncDataCopyWith<List<Category>, $Res>(_self.categories, (value) {
+      return _then(_self.copyWith(categories: value));
+    });
+  }
+
+  /// Create a copy of RecipesScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AsyncDataCopyWith<List<Recipe>, $Res> get suggestions {
+    return $AsyncDataCopyWith<List<Recipe>, $Res>(_self.suggestions, (value) {
+      return _then(_self.copyWith(suggestions: value));
+    });
+  }
+}
+
+/// @nodoc
+
+class _RecipesScreenState implements RecipesScreenState {
+  const _RecipesScreenState({
+    this.categories = const AsyncData<List<Category>>(data: []),
+    this.suggestions = const AsyncData<List<Recipe>>(data: []),
+  });
+
+  @override
+  @JsonKey()
+  final AsyncData<List<Category>> categories;
+  @override
+  @JsonKey()
+  final AsyncData<List<Recipe>> suggestions;
+
+  /// Create a copy of RecipesScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$RecipesScreenStateCopyWith<_RecipesScreenState> get copyWith =>
+      __$RecipesScreenStateCopyWithImpl<_RecipesScreenState>(this, _$identity);
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _RecipesScreenState &&
+            (identical(other.categories, categories) ||
+                other.categories == categories) &&
+            (identical(other.suggestions, suggestions) ||
+                other.suggestions == suggestions));
+  }
+
+  @override
+  int get hashCode => Object.hash(runtimeType, categories, suggestions);
+
+  @override
+  String toString() {
+    return 'RecipesScreenState(categories: $categories, suggestions: $suggestions)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$RecipesScreenStateCopyWith<$Res>
+    implements $RecipesScreenStateCopyWith<$Res> {
+  factory _$RecipesScreenStateCopyWith(
+    _RecipesScreenState value,
+    $Res Function(_RecipesScreenState) _then,
+  ) = __$RecipesScreenStateCopyWithImpl;
+  @override
+  @useResult
+  $Res call({
+    AsyncData<List<Category>> categories,
+    AsyncData<List<Recipe>> suggestions,
+  });
+
+  @override
+  $AsyncDataCopyWith<List<Category>, $Res> get categories;
+  @override
+  $AsyncDataCopyWith<List<Recipe>, $Res> get suggestions;
+}
+
+/// @nodoc
+class __$RecipesScreenStateCopyWithImpl<$Res>
+    implements _$RecipesScreenStateCopyWith<$Res> {
+  __$RecipesScreenStateCopyWithImpl(this._self, this._then);
+
+  final _RecipesScreenState _self;
+  final $Res Function(_RecipesScreenState) _then;
+
+  /// Create a copy of RecipesScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({Object? categories = null, Object? suggestions = null}) {
+    return _then(
+      _RecipesScreenState(
+        categories: null == categories
+            ? _self.categories
+            : categories // ignore: cast_nullable_to_non_nullable
+                  as AsyncData<List<Category>>,
+        suggestions: null == suggestions
+            ? _self.suggestions
+            : suggestions // ignore: cast_nullable_to_non_nullable
+                  as AsyncData<List<Recipe>>,
+      ),
+    );
+  }
+
+  /// Create a copy of RecipesScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AsyncDataCopyWith<List<Category>, $Res> get categories {
+    return $AsyncDataCopyWith<List<Category>, $Res>(_self.categories, (value) {
+      return _then(_self.copyWith(categories: value));
+    });
+  }
+
+  /// Create a copy of RecipesScreenState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AsyncDataCopyWith<List<Recipe>, $Res> get suggestions {
+    return $AsyncDataCopyWith<List<Recipe>, $Res>(_self.suggestions, (value) {
+      return _then(_self.copyWith(suggestions: value));
+    });
+  }
+}
+
+/// @nodoc
+mixin _$AsyncData<T> {
+  T get data;
+  bool get isLoading;
+  bool get hasError;
+
+  /// Create a copy of AsyncData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  $AsyncDataCopyWith<T, AsyncData<T>> get copyWith =>
+      _$AsyncDataCopyWithImpl<T, AsyncData<T>>(
+        this as AsyncData<T>,
+        _$identity,
+      );
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is AsyncData<T> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.hasError, hasError) ||
+                other.hasError == hasError));
   }
 
   @override
   int get hashCode => Object.hash(
     runtimeType,
-    const DeepCollectionEquality().hash(_categories),
-    searching,
-    query,
-    const DeepCollectionEquality().hash(_queryResult),
+    const DeepCollectionEquality().hash(data),
+    isLoading,
+    hasError,
   );
 
   @override
   String toString() {
-    return 'RecipesScreenState.success(categories: $categories, searching: $searching, query: $query, queryResult: $queryResult)';
+    return 'AsyncData<$T>(data: $data, isLoading: $isLoading, hasError: $hasError)';
   }
 }
 
 /// @nodoc
-abstract mixin class $SuccessStateCopyWith<$Res>
-    implements $RecipesScreenStateCopyWith<$Res> {
-  factory $SuccessStateCopyWith(
-    SuccessState value,
-    $Res Function(SuccessState) _then,
-  ) = _$SuccessStateCopyWithImpl;
+abstract mixin class $AsyncDataCopyWith<T, $Res> {
+  factory $AsyncDataCopyWith(
+    AsyncData<T> value,
+    $Res Function(AsyncData<T>) _then,
+  ) = _$AsyncDataCopyWithImpl;
   @useResult
-  $Res call({
-    List<Category> categories,
-    bool searching,
-    String query,
-    List<RecipeSummary> queryResult,
-  });
+  $Res call({T data, bool isLoading, bool hasError});
 }
 
 /// @nodoc
-class _$SuccessStateCopyWithImpl<$Res> implements $SuccessStateCopyWith<$Res> {
-  _$SuccessStateCopyWithImpl(this._self, this._then);
+class _$AsyncDataCopyWithImpl<T, $Res> implements $AsyncDataCopyWith<T, $Res> {
+  _$AsyncDataCopyWithImpl(this._self, this._then);
 
-  final SuccessState _self;
-  final $Res Function(SuccessState) _then;
+  final AsyncData<T> _self;
+  final $Res Function(AsyncData<T>) _then;
 
-  /// Create a copy of RecipesScreenState
+  /// Create a copy of AsyncData
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
+  @override
   $Res call({
-    Object? categories = null,
-    Object? searching = null,
-    Object? query = null,
-    Object? queryResult = null,
+    Object? data = freezed,
+    Object? isLoading = null,
+    Object? hasError = null,
   }) {
     return _then(
-      SuccessState(
-        categories: null == categories
-            ? _self._categories
-            : categories // ignore: cast_nullable_to_non_nullable
-                  as List<Category>,
-        searching: null == searching
-            ? _self.searching
-            : searching // ignore: cast_nullable_to_non_nullable
+      _self.copyWith(
+        data: freezed == data
+            ? _self.data
+            : data // ignore: cast_nullable_to_non_nullable
+                  as T,
+        isLoading: null == isLoading
+            ? _self.isLoading
+            : isLoading // ignore: cast_nullable_to_non_nullable
                   as bool,
-        query: null == query
-            ? _self.query
-            : query // ignore: cast_nullable_to_non_nullable
-                  as String,
-        queryResult: null == queryResult
-            ? _self._queryResult
-            : queryResult // ignore: cast_nullable_to_non_nullable
-                  as List<RecipeSummary>,
+        hasError: null == hasError
+            ? _self.hasError
+            : hasError // ignore: cast_nullable_to_non_nullable
+                  as bool,
       ),
     );
   }
@@ -205,20 +310,100 @@ class _$SuccessStateCopyWithImpl<$Res> implements $SuccessStateCopyWith<$Res> {
 
 /// @nodoc
 
-class ErrorState extends RecipesScreenState {
-  const ErrorState() : super._();
+class _AsyncData<T> implements AsyncData<T> {
+  const _AsyncData({
+    required this.data,
+    this.isLoading = false,
+    this.hasError = false,
+  });
+
+  @override
+  final T data;
+  @override
+  @JsonKey()
+  final bool isLoading;
+  @override
+  @JsonKey()
+  final bool hasError;
+
+  /// Create a copy of AsyncData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @pragma('vm:prefer-inline')
+  _$AsyncDataCopyWith<T, _AsyncData<T>> get copyWith =>
+      __$AsyncDataCopyWithImpl<T, _AsyncData<T>>(this, _$identity);
 
   @override
   bool operator ==(Object other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is ErrorState);
+        (other.runtimeType == runtimeType &&
+            other is _AsyncData<T> &&
+            const DeepCollectionEquality().equals(other.data, data) &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.hasError, hasError) ||
+                other.hasError == hasError));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+    runtimeType,
+    const DeepCollectionEquality().hash(data),
+    isLoading,
+    hasError,
+  );
 
   @override
   String toString() {
-    return 'RecipesScreenState.error()';
+    return 'AsyncData<$T>(data: $data, isLoading: $isLoading, hasError: $hasError)';
+  }
+}
+
+/// @nodoc
+abstract mixin class _$AsyncDataCopyWith<T, $Res>
+    implements $AsyncDataCopyWith<T, $Res> {
+  factory _$AsyncDataCopyWith(
+    _AsyncData<T> value,
+    $Res Function(_AsyncData<T>) _then,
+  ) = __$AsyncDataCopyWithImpl;
+  @override
+  @useResult
+  $Res call({T data, bool isLoading, bool hasError});
+}
+
+/// @nodoc
+class __$AsyncDataCopyWithImpl<T, $Res>
+    implements _$AsyncDataCopyWith<T, $Res> {
+  __$AsyncDataCopyWithImpl(this._self, this._then);
+
+  final _AsyncData<T> _self;
+  final $Res Function(_AsyncData<T>) _then;
+
+  /// Create a copy of AsyncData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $Res call({
+    Object? data = freezed,
+    Object? isLoading = null,
+    Object? hasError = null,
+  }) {
+    return _then(
+      _AsyncData<T>(
+        data: freezed == data
+            ? _self.data
+            : data // ignore: cast_nullable_to_non_nullable
+                  as T,
+        isLoading: null == isLoading
+            ? _self.isLoading
+            : isLoading // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        hasError: null == hasError
+            ? _self.hasError
+            : hasError // ignore: cast_nullable_to_non_nullable
+                  as bool,
+      ),
+    );
   }
 }

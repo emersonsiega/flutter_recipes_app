@@ -13,8 +13,7 @@ class ErrorMessageBox extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: context.colorScheme.errorContainer,
-        border: Border.all(color: context.colorScheme.error, width: 1),
+        border: Border.all(color: context.colorScheme.onSurface.withValues(alpha: 0.3), width: .5),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Column(
@@ -35,9 +34,12 @@ class ErrorMessageBox extends StatelessWidget {
               padding: const EdgeInsets.only(top: 18.0),
               child: Align(
                 alignment: .centerRight,
-                child: FilledButton(
+                child: TextButton(
                   onPressed: onRetry,
-                  child: Text(retryLabel ?? t.errorMessageBox.retry),
+                  child: Text(
+                    retryLabel ?? t.errorMessageBox.retry,
+                    style: TextStyle(color: context.colorScheme.error),
+                  ),
                 ),
               ),
             ),

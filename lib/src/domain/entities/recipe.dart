@@ -26,5 +26,12 @@ sealed class Recipe with _$Recipe {
     required Category category,
     @Default([]) List<String> tags,
     Uri? video,
+    required DifficultyLevel difficulty,
   }) = DetailedRecipe;
+}
+
+enum DifficultyLevel {
+  easy,
+  medium,
+  hard,
 }

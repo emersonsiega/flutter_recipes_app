@@ -4,43 +4,51 @@ import 'package:flutter_recipes_app/src/presentation/views/recipes/recipes_scree
 
 class RecipesScreenViewModel extends ChangeNotifier {
   final IRecipeRepository _recipeRepository;
-  RecipesScreenViewModel(this._recipeRepository);
+  final FetchRecipeSuggestions _fetchRecipeSuggestions;
 
-  RecipesScreenState _state = const RecipesScreenState.idle();
+  RecipesScreenViewModel(
+    this._recipeRepository,
+    this._fetchRecipeSuggestions,
+  );
+
+  RecipesScreenState _state = const RecipesScreenState(
+    categories: AsyncData(data: [], isLoading: true),
+    suggestions: AsyncData(data: [], isLoading: true),
+  );
   RecipesScreenState get state => _state;
 
-  /// Fetches all available recipe categories
+  /// Fetches all data for the recipes screen
+  Future<void> fetchData() async {
+    await Future.wait([fetchCategories(), fetchSuggestions()]);
+  }
+
+  /// Fetches the categories for the recipes screen
   Future<void> fetchCategories() async {
-    _state = const RecipesScreenState.loading();
+    _state = _state.copyWith(categories: _state.categories.copyWith(isLoading: true, hasError: false));
     notifyListeners();
 
     final result = await _recipeRepository.getCategories();
-    _state = result.fold(
-      ifLeft: (_) => ErrorState(),
-      ifRight: (categories) => SuccessState(categories: categories),
+
+    final newState = result.fold(
+      ifLeft: (_) => _state.categories.copyWith(hasError: true, isLoading: false),
+      ifRight: (data) => _state.categories.copyWith(isLoading: false, data: data),
     );
+    _state = _state.copyWith(categories: newState);
     notifyListeners();
   }
 
-  // Search recipes (dummy logic, should be replaced with real implementation)
-  Future<void> searchRecipes(String query) async {
-    if (state case SuccessState(:final copyWith)) {
-      _state = copyWith(query: query, searching: true);
-      notifyListeners();
+  /// Fetches the suggestions for the recipes screen
+  Future<void> fetchSuggestions() async {
+    _state = _state.copyWith(suggestions: _state.suggestions.copyWith(isLoading: true, hasError: false));
+    notifyListeners();
 
-      // Simulate an API call
-      await Future.delayed(const Duration(seconds: 1));
+    final result = await _fetchRecipeSuggestions();
 
-      final exampleResults = <RecipeSummary>[];
-      _state = copyWith(query: query, queryResult: exampleResults, searching: false);
-      notifyListeners();
-    }
-  }
-
-  void reset() {
-    if (state case SuccessState(:final copyWith, :final query) when query.isNotEmpty) {
-      _state = copyWith(query: '', queryResult: [], searching: false);
-      notifyListeners();
-    }
+    final newState = result.fold(
+      ifLeft: (_) => _state.suggestions.copyWith(hasError: true, isLoading: false),
+      ifRight: (data) => _state.suggestions.copyWith(data: data, isLoading: false),
+    );
+    _state = _state.copyWith(suggestions: newState);
+    notifyListeners();
   }
 }

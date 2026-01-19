@@ -6,7 +6,14 @@ import 'package:logger/logger.dart';
 
 /// Default app logger
 Logger logger = Logger(
-  level: Platform.environment.containsKey('FLUTTER_TEST') ? Level.off : Level.debug,
+  level: (() {
+    try {
+      return Platform.environment.containsKey('FLUTTER_TEST') ? Level.off : Level.debug;
+    } catch (_) {
+      // Platform/environment not available on web, default to debug
+      return Level.debug;
+    }
+  })(),
   printer: CustomPrinter(
     methodCount: 0,
     errorMethodCount: 7,

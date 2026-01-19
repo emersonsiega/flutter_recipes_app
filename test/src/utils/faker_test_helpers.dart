@@ -43,11 +43,13 @@ extension TestHelpers on Faker {
     String? id,
     String? name,
     String? description,
+    Uri? imageUrl,
   }) {
     return Category(
       id: id ?? guid.guid(),
       name: name ?? food.cuisine(),
       description: description ?? lorem.sentence(),
+      imageUrl: imageUrl ?? Uri.parse(internet.httpsUrl()),
     );
   }
 

@@ -4,7 +4,10 @@ import 'package:flutter_recipes_app/src/presentation/widgets/custom_progress_ind
 
 class CachedImage extends StatelessWidget {
   final String? imageUrl;
-  const CachedImage({super.key, this.imageUrl});
+  final BoxFit? fit;
+  final double? width;
+  final double? height;
+  const CachedImage({super.key, this.imageUrl, this.width, this.height, this.fit});
 
   @override
   Widget build(BuildContext context) {
@@ -12,8 +15,10 @@ class CachedImage extends StatelessWidget {
 
     return CachedNetworkImage(
       imageUrl: imageUrl ?? '',
-      width: 80,
-      placeholder: (context, url) => CustomProgressIndicator(size: 18),
+      width: width,
+      height: height,
+      fit: fit,
+      placeholder: (context, url) => Center(child: CustomProgressIndicator(size: 18)),
       errorWidget: (context, url, error) => Icon(Icons.error, size: 24),
     );
   }

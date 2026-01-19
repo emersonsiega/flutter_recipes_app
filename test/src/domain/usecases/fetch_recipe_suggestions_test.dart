@@ -2,7 +2,6 @@ import 'package:dart_either/dart_either.dart';
 import 'package:faker/faker.dart';
 import 'package:flutter_recipes_app/src/data/data.dart';
 import 'package:flutter_recipes_app/src/domain/domain.dart';
-import 'package:flutter_recipes_app/src/domain/usecases/fetch_recipe_suggestions.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

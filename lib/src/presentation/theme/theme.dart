@@ -7,12 +7,15 @@ ThemeData buildTheme() {
     fontFamily: 'Inter',
     colorScheme: colorScheme,
     inputDecorationTheme: InputDecorationTheme(
-      filled: true,
-      fillColor: colorScheme.primary,
-      prefixIconColor: colorScheme.onPrimary.withValues(alpha: 0.8),
-      hintStyle: TextStyle(color: colorScheme.onPrimary.withValues(alpha: 0.8)),
+      prefixIconColor: colorScheme.onSurface.withValues(alpha: 0.5),
+      hintStyle: TextStyle(color: colorScheme.onSurface.withValues(alpha: 0.5)),
       border: OutlineInputBorder(
-        borderRadius: BorderRadius.circular(100),
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.onSurface.withValues(alpha: 0.2), width: 0.5),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: BorderRadius.circular(8),
+        borderSide: BorderSide(color: colorScheme.onSurface.withValues(alpha: 0.2), width: 0.5),
       ),
     ),
   );

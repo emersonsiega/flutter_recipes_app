@@ -1,0 +1,26 @@
+{
+    "appTitle": "Recipes App",
+    "failures": {
+        "generic": "An unexpected error occurred while loading the data. Please try again."
+    },
+    "errorMessageBox": {
+        "retry": "Try again"
+    },
+    "recipes": {
+        "title": "Recipe Finder",
+        "searchPlaceholder": "Search for recipes...",
+        "categories": "Categories",
+        "noCategoriesFound": "No categories found",
+        "suggestions": "Suggestions",
+        "noSuggestionsFound": "No suggestions found",
+        "loadingSuggestions": "Loading suggestions...",
+        "loadingCategories": "Loading categories...",
+        "errorLoadingSuggestions": "It was not possible to load the suggestions. Please try again.",
+        "errorLoadingCategories": "It was not possible to load the categories. Please try again."
+    },
+    "difficultyLevel(context=DifficultyLevel, param=difficulty)": {
+        "easy": "Easy",
+        "medium": "Medium",
+        "hard": "Hard"
+    }
+}

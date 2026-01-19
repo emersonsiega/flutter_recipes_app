@@ -4,35 +4,18 @@ import 'package:flutter_recipes_app/src/presentation/i18n/i18n.dart';
 
 class SearchBar extends StatefulWidget implements PreferredSizeWidget {
   final ValueChanged<String> onSubmitted;
-  final String query;
 
-  const SearchBar({super.key, required this.onSubmitted, required this.query});
+  const SearchBar({super.key, required this.onSubmitted});
 
   @override
   State<SearchBar> createState() => _SearchBarState();
 
   @override
-  Size get preferredSize => const Size.fromHeight(48);
+  Size get preferredSize => const Size.fromHeight(75);
 }
 
 class _SearchBarState extends State<SearchBar> {
-  late final TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController(text: widget.query);
-  }
-
-  @override
-  void didUpdateWidget(covariant SearchBar oldWidget) {
-    super.didUpdateWidget(oldWidget);
-
-    if (widget.query != oldWidget.query) {
-      _controller.text = widget.query;
-      setState(() {});
-    }
-  }
+  final _controller = TextEditingController();
 
   @override
   void dispose() {
@@ -46,7 +29,7 @@ class _SearchBarState extends State<SearchBar> {
       padding: const EdgeInsets.all(12),
       child: TextField(
         controller: _controller,
-        style: TextStyle(color: context.colorScheme.onPrimary),
+        style: TextStyle(color: context.colorScheme.onSurface),
         decoration: InputDecoration(
           prefixIcon: Icon(Icons.search, size: 20),
           hintText: t.recipes.searchPlaceholder,
@@ -63,7 +46,7 @@ class _SearchBarState extends State<SearchBar> {
                           widget.onSubmitted('');
                         }
                       : null,
-                  child: Icon(Icons.clear, size: 20, color: context.colorScheme.onPrimary),
+                  child: Icon(Icons.clear, size: 20, color: context.colorScheme.onSurface),
                 ),
               );
             },

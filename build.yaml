@@ -11,6 +11,8 @@ targets:
           output_file_name: translations.g.dart
           string_interpolation: braces
           generate_enum: false
+          imports:
+            - "package:flutter_recipes_app/src/domain/domain.dart"
       freezed:
         options:
           format: true

@@ -11,6 +11,8 @@ Future<void> bootstrap() async {
 
   final providers = _setupProviders();
 
+  await LocaleSettings.useDeviceLocale();
+
   runApp(
     MultiProvider(
       providers: providers,
@@ -35,9 +37,15 @@ List<InheritedProvider> _setupProviders() {
         remoteDatasource: context.read<IRecipeRemoteDatasource>(),
       ),
     ),
+    Provider<FetchRecipeSuggestions>(
+      create: (context) => FetchRecipeSuggestions(
+        context.read<IRecipeRepository>(),
+      ),
+    ),
     ChangeNotifierProvider<RecipesScreenViewModel>(
       create: (context) => RecipesScreenViewModel(
         context.read<IRecipeRepository>(),
+        context.read<FetchRecipeSuggestions>(),
       ),
     ),
   ];
