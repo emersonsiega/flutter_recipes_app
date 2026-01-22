@@ -38,7 +38,7 @@ class TranslationsEn with BaseTranslations<AppLocale, Translations> implements T
 	TranslationsEn $copyWith({TranslationMetadata<AppLocale, Translations>? meta}) => TranslationsEn(meta: meta ?? this.$meta);
 
 	// Translations
-	@override String get appTitle => 'Recipes App';
+	@override String get appTitle => 'Recipe Finder';
 	@override late final _TranslationsFailuresEn failures = _TranslationsFailuresEn._(_root);
 	@override late final _TranslationsActionsEn actions = _TranslationsActionsEn._(_root);
 	@override late final _TranslationsRecipesEn recipes = _TranslationsRecipesEn._(_root);
@@ -162,7 +162,7 @@ class _TranslationsRecipeDetailsEn implements TranslationsRecipeDetailsPtBr {
 extension on TranslationsEn {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
-			'appTitle' => 'Recipes App',
+			'appTitle' => 'Recipe Finder',
 			'failures.generic' => 'An unexpected error occurred while loading the data. Please try again.',
 			'actions.backToHome' => 'Back to home',
 			'actions.retry' => 'Try again',

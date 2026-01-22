@@ -1,4 +1,8 @@
-# Recipes App
+<p align="left" style="margin-bottom:0">
+   <img src="assets/icons/android/icon.png" width="32" style="vertical-align:middle;margin-right:10px" />
+   <span style="font-size:2em; vertical-align:middle;"><b>Recipe Finder</b></span>
+</p>
+<br/>
 
 A Flutter application for discovering and exploring recipes from TheMealDB API. The app provides an intuitive interface to browse recipes by category, search for specific dishes, view detailed recipe information including ingredients, instructions, and video tutorials.
 

@@ -234,7 +234,6 @@ class _RecipeChips extends StatelessWidget {
     return Wrap(
       direction: .horizontal,
       spacing: 4,
-      runSpacing: 4,
       children: [
         Chip(
           avatar: Icon(Icons.restaurant_rounded),

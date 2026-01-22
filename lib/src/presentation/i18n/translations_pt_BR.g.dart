@@ -41,8 +41,8 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 
 	// Translations
 
-	/// pt-BR: 'Receitas App'
-	String get appTitle => 'Receitas App';
+	/// pt-BR: 'Recipe Finder'
+	String get appTitle => 'Recipe Finder';
 
 	late final TranslationsFailuresPtBr failures = TranslationsFailuresPtBr._(_root);
 	late final TranslationsActionsPtBr actions = TranslationsActionsPtBr._(_root);
@@ -228,7 +228,7 @@ class TranslationsRecipeDetailsPtBr {
 extension on Translations {
 	dynamic _flatMapFunction(String path) {
 		return switch (path) {
-			'appTitle' => 'Receitas App',
+			'appTitle' => 'Recipe Finder',
 			'failures.generic' => 'Ocorreu um erro inesperado ao carregar os dados. Por favor, tente novamente.',
 			'actions.backToHome' => 'Voltar ao início',
 			'actions.retry' => 'Tentar novamente',

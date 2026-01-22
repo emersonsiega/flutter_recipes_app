@@ -1,5 +1,5 @@
 {
-    "appTitle": "Recipes App",
+    "appTitle": "Recipe Finder",
     "failures": {
         "generic": "An unexpected error occurred while loading the data. Please try again."
     },
