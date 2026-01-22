@@ -18,6 +18,7 @@ void main() {
   setUpAll(() {
     faker = Faker();
     registerFallbackValue(faker.createCategory());
+    registerFallbackValue('');
   });
 
   setUp(() {
@@ -26,11 +27,11 @@ void main() {
     LocaleSettings.setLocale(AppLocale.ptBr);
   });
 
-  Widget createTestWidget(CategoryViewController viewModel, Category category) {
+  Widget createTestWidget(CategoryViewController viewModel, Category? category, String name) {
     return MaterialApp(
       home: ChangeNotifierProvider<CategoryViewController>.value(
         value: viewModel,
-        child: CategoryScreen(category: category),
+        child: CategoryScreen(category: category, name: name),
       ),
     );
   }
@@ -42,10 +43,10 @@ void main() {
         when(() => mockViewModel.state).thenReturn(
           const CategoryState(recipes: [], isLoading: true, hasError: false),
         );
-        when(() => mockViewModel.fetchRecipes(any())).thenAnswer((_) async {});
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
 
         // Act
-        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory));
+        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory, testCategory.name));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
@@ -60,15 +61,32 @@ void main() {
         when(() => mockViewModel.state).thenReturn(
           const CategoryState(recipes: [], isLoading: true, hasError: false),
         );
-        when(() => mockViewModel.fetchRecipes(any())).thenAnswer((_) async {});
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
 
         // Act
-        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory));
+        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory, testCategory.name));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
         // Assert
-        verify(() => mockViewModel.fetchRecipes(testCategory)).called(1);
+        verify(() => mockViewModel.fetchRecipes(testCategory, testCategory.name)).called(1);
+      });
+
+      testWidgets('should call fetchRecipes with null category when category is not provided', (tester) async {
+        // Arrange
+        const categoryName = 'Test Category';
+        when(() => mockViewModel.state).thenReturn(
+          const CategoryState(recipes: [], isLoading: true, hasError: false),
+        );
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
+
+        // Act
+        await tester.pumpWidget(createTestWidget(mockViewModel, null, categoryName));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 100));
+
+        // Assert
+        verify(() => mockViewModel.fetchRecipes(null, categoryName)).called(1);
       });
 
       testWidgets('should display recipes list when fetchRecipes succeeds', (tester) async {
@@ -81,10 +99,10 @@ void main() {
         when(() => mockViewModel.state).thenReturn(
           CategoryState(recipes: recipes, isLoading: false, hasError: false),
         );
-        when(() => mockViewModel.fetchRecipes(any())).thenAnswer((_) async {});
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
 
         // Act
-        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory));
+        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory, testCategory.name));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
@@ -99,10 +117,10 @@ void main() {
         when(() => mockViewModel.state).thenReturn(
           const CategoryState(recipes: [], isLoading: false, hasError: false),
         );
-        when(() => mockViewModel.fetchRecipes(any())).thenAnswer((_) async {});
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
 
         // Act
-        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory));
+        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory, testCategory.name));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
@@ -121,10 +139,10 @@ void main() {
         when(() => mockViewModel.state).thenReturn(
           CategoryState(recipes: recipes, isLoading: false, hasError: false),
         );
-        when(() => mockViewModel.fetchRecipes(any())).thenAnswer((_) async {});
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
 
         // Act
-        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory));
+        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory, testCategory.name));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
@@ -141,10 +159,10 @@ void main() {
         when(() => mockViewModel.state).thenReturn(
           const CategoryState(recipes: [], isLoading: false, hasError: true),
         );
-        when(() => mockViewModel.fetchRecipes(any())).thenAnswer((_) async {});
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
 
         // Act
-        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory));
+        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory, testCategory.name));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
@@ -159,10 +177,10 @@ void main() {
         when(() => mockViewModel.state).thenReturn(
           const CategoryState(recipes: [], isLoading: false, hasError: true),
         );
-        when(() => mockViewModel.fetchRecipes(any())).thenAnswer((_) async {});
+        when(() => mockViewModel.fetchRecipes(any(), any())).thenAnswer((_) async {});
 
         // Act
-        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory));
+        await tester.pumpWidget(createTestWidget(mockViewModel, testCategory, testCategory.name));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 100));
 
@@ -173,7 +191,7 @@ void main() {
         await tester.pump(const Duration(milliseconds: 100));
 
         // Assert
-        verify(() => mockViewModel.fetchRecipes(testCategory)).called(2); // Once on init, once on retry
+        verify(() => mockViewModel.fetchRecipes(testCategory, testCategory.name)).called(2); // Once on init, once on retry
       });
     });
   });

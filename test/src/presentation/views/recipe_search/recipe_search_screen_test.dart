@@ -82,7 +82,8 @@ void main() {
         await tester.pump(const Duration(milliseconds: 100));
 
         // Assert
-        expect(find.text(t.recipeSearch.title(name: testSearchName)), findsOneWidget);
+        // The title uses Text.rich with a TextSpan, so we check for text containing the search name
+        expect(find.textContaining(testSearchName), findsOneWidget);
       });
 
       testWidgets('should display back to home button', (tester) async {

@@ -1,26 +1,24 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_recipes_app/src/domain/domain.dart';
+import 'package:flutter_recipes_app/src/presentation/viewmodel/viewmodel.dart';
 import 'package:flutter_recipes_app/src/presentation/views/category/category_screen_state.dart';
 
-class CategoryViewController extends ChangeNotifier {
+class CategoryViewController extends ViewModel<CategoryState> {
   final IRecipeRepository _recipeRepository;
 
-  CategoryViewController(this._recipeRepository);
-
-  CategoryState _state = const CategoryState(recipes: [], isLoading: true, hasError: false);
-  CategoryState get state => _state;
+  CategoryViewController(this._recipeRepository)
+    : super(const CategoryState(recipes: [], isLoading: true, hasError: false));
 
   /// Fetches the recipes for the category screen
-  Future<void> fetchRecipes(Category category) async {
-    _state = _state.copyWith(isLoading: true, hasError: false);
-    notifyListeners();
+  Future<void> fetchRecipes(Category? category, String name) async {
+    emit(state.copyWith(isLoading: true, hasError: false));
 
-    final result = await _recipeRepository.getRecipesByCategory(category);
+    final result = await _recipeRepository.getRecipesByCategory(category ?? Category(name: name));
 
-    _state = result.fold(
-      ifLeft: (_) => _state.copyWith(hasError: true, isLoading: false),
-      ifRight: (data) => _state.copyWith(isLoading: false, recipes: data),
+    emit(
+      result.fold(
+        ifLeft: (_) => state.copyWith(hasError: true, isLoading: false),
+        ifRight: (data) => state.copyWith(isLoading: false, recipes: data),
+      ),
     );
-    notifyListeners();
   }
 }

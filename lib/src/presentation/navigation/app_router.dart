@@ -1,13 +1,10 @@
 import 'package:flutter_recipes_app/src/domain/domain.dart';
-import 'package:flutter_recipes_app/src/presentation/navigation/router_logger_observer.dart';
 import 'package:flutter_recipes_app/src/presentation/views/views.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 final appRouter = GoRouter(
-  observers: [
-    RouterLoggerObserver(),
-  ],
+  debugLogDiagnostics: true,
   routes: <RouteBase>[
     GoRoute(
       name: 'home',
@@ -19,6 +16,24 @@ final appRouter = GoRouter(
         ),
         child: const HomeScreen(),
       ),
+    ),
+    GoRoute(
+      name: 'recipe',
+      path: '/recipe',
+      redirect: (context, state) {
+        final recipe = state.extra is Recipe ? state.extra as Recipe : null;
+        if (recipe == null) return '/';
+        return null;
+      },
+      builder: (context, state) {
+        final recipe = state.extra as Recipe;
+        return ChangeNotifierProvider<RecipeDetailsViewController>(
+          create: (context) => RecipeDetailsViewController(
+            context.read<IRecipeRepository>(),
+          ),
+          child: RecipeDetailsScreen(recipe: recipe),
+        );
+      },
     ),
     GoRoute(
       name: 'recipeSearch',
@@ -39,19 +54,22 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       name: 'category',
-      path: '/category',
+      path: '/category/:name',
       redirect: (context, state) {
         final category = state.extra is Category ? state.extra as Category : null;
-        if (category == null) return '/';
+        final name = state.pathParameters['name'] ?? '';
+        if (category == null && name.isEmpty) return '/';
         return null;
       },
       builder: (context, state) {
-        final category = state.extra as Category;
+        final category = state.extra as Category?;
+        final name = state.pathParameters['name'] ?? '';
+
         return ChangeNotifierProvider<CategoryViewController>(
           create: (context) => CategoryViewController(
             context.read<IRecipeRepository>(),
           ),
-          child: CategoryScreen(category: category),
+          child: CategoryScreen(category: category, name: name),
         );
       },
     ),

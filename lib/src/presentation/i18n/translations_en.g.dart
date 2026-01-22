@@ -52,8 +52,10 @@ class TranslationsEn with BaseTranslations<AppLocale, Translations> implements T
 				return 'Hard';
 		}
 	}
+	@override late final _TranslationsVideoPlayerEn videoPlayer = _TranslationsVideoPlayerEn._(_root);
 	@override late final _TranslationsCategoryEn category = _TranslationsCategoryEn._(_root);
 	@override late final _TranslationsRecipeSearchEn recipeSearch = _TranslationsRecipeSearchEn._(_root);
+	@override late final _TranslationsRecipeDetailsEn recipeDetails = _TranslationsRecipeDetailsEn._(_root);
 }
 
 // Path: failures
@@ -86,7 +88,7 @@ class _TranslationsRecipesEn implements TranslationsRecipesPtBr {
 	// Translations
 	@override String get title => 'Recipe Finder';
 	@override String get searchPlaceholder => 'Search for recipes...';
-	@override String get categories => 'Categories';
+	@override String get categories => 'Browse by category';
 	@override String get noCategoriesFound => 'No categories found';
 	@override String get suggestions => 'Suggestions';
 	@override String get noSuggestionsFound => 'No suggestions found';
@@ -94,6 +96,16 @@ class _TranslationsRecipesEn implements TranslationsRecipesPtBr {
 	@override String get loadingCategories => 'Loading categories...';
 	@override String get errorLoadingSuggestions => 'It was not possible to load the suggestions. Please try again.';
 	@override String get errorLoadingCategories => 'It was not possible to load the categories. Please try again.';
+}
+
+// Path: videoPlayer
+class _TranslationsVideoPlayerEn implements TranslationsVideoPlayerPtBr {
+	_TranslationsVideoPlayerEn._(this._root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get errorLoadingVideo => 'Unable to load the video.\nPlease try again later.';
 }
 
 // Path: category
@@ -117,11 +129,29 @@ class _TranslationsRecipeSearchEn implements TranslationsRecipeSearchPtBr {
 	final TranslationsEn _root; // ignore: unused_field
 
 	// Translations
-	@override String title({required Object name}) => 'Search results for "${name}"';
+	@override TextSpan title({required InlineSpan query}) => TextSpan(children: [
+		const TextSpan(text: 'Search results for "'),
+		query,
+		const TextSpan(text: '"'),
+	]);
 	@override String recipesCount({required Object count}) => '${count} recipes found';
 	@override String get noRecipesFound => 'No recipes found';
 	@override String get errorLoadingRecipes => 'It was not possible to search the recipes. Please try again.';
 	@override String get loadingRecipes => 'Searching for recipes...';
+}
+
+// Path: recipeDetails
+class _TranslationsRecipeDetailsEn implements TranslationsRecipeDetailsPtBr {
+	_TranslationsRecipeDetailsEn._(this._root);
+
+	final TranslationsEn _root; // ignore: unused_field
+
+	// Translations
+	@override String get videoTutorial => 'Video tutorial';
+	@override String get ingredients => 'Ingredients';
+	@override String get instructions => 'Instructions';
+	@override String get errorLoadingRecipe => 'It was not possible to load the recipe. Please try again.';
+	@override String get noRecipeFound => 'No recipe found';
 }
 
 /// The flat map containing all translations for locale <en>.
@@ -138,7 +168,7 @@ extension on TranslationsEn {
 			'actions.retry' => 'Try again',
 			'recipes.title' => 'Recipe Finder',
 			'recipes.searchPlaceholder' => 'Search for recipes...',
-			'recipes.categories' => 'Categories',
+			'recipes.categories' => 'Browse by category',
 			'recipes.noCategoriesFound' => 'No categories found',
 			'recipes.suggestions' => 'Suggestions',
 			'recipes.noSuggestionsFound' => 'No suggestions found',
@@ -147,16 +177,22 @@ extension on TranslationsEn {
 			'recipes.errorLoadingSuggestions' => 'It was not possible to load the suggestions. Please try again.',
 			'recipes.errorLoadingCategories' => 'It was not possible to load the categories. Please try again.',
 			'difficultyLevel' => ({required DifficultyLevel difficulty}) { switch (difficulty) { case DifficultyLevel.easy: return 'Easy'; case DifficultyLevel.medium: return 'Medium'; case DifficultyLevel.hard: return 'Hard'; } }, 
+			'videoPlayer.errorLoadingVideo' => 'Unable to load the video.\nPlease try again later.',
 			'category.title' => ({required Object categoryName}) => '${categoryName} Recipes',
 			'category.recipesCount' => ({required Object count}) => '${count} recipes found',
 			'category.noRecipesFound' => 'No recipes found',
 			'category.errorLoadingRecipes' => 'It was not possible to load the recipes. Please try again.',
 			'category.loadingRecipes' => 'Loading recipes...',
-			'recipeSearch.title' => ({required Object name}) => 'Search results for "${name}"',
+			'recipeSearch.title' => ({required InlineSpan query}) => TextSpan(children: [ const TextSpan(text: 'Search results for "'), query, const TextSpan(text: '"'), ]), 
 			'recipeSearch.recipesCount' => ({required Object count}) => '${count} recipes found',
 			'recipeSearch.noRecipesFound' => 'No recipes found',
 			'recipeSearch.errorLoadingRecipes' => 'It was not possible to search the recipes. Please try again.',
 			'recipeSearch.loadingRecipes' => 'Searching for recipes...',
+			'recipeDetails.videoTutorial' => 'Video tutorial',
+			'recipeDetails.ingredients' => 'Ingredients',
+			'recipeDetails.instructions' => 'Instructions',
+			'recipeDetails.errorLoadingRecipe' => 'It was not possible to load the recipe. Please try again.',
+			'recipeDetails.noRecipeFound' => 'No recipe found',
 			_ => null,
 		};
 	}

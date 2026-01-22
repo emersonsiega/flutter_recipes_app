@@ -4,4 +4,7 @@ export 'error_message_box.dart';
 export 'custom_circle_avatar.dart';
 export 'cached_image.dart';
 export 'recipe_card.dart';
+export 'recipe_image.dart';
 export 'loading_card.dart';
+export 'back_sliver_app_bar.dart';
+export 'recipe_hero_container.dart';

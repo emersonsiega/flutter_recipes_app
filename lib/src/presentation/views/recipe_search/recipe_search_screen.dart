@@ -28,37 +28,10 @@ class _RecipeSearchScreenState extends State<RecipeSearchScreen> {
     final state = context.watch<RecipeSearchScreenViewModel>().state;
 
     return Scaffold(
+      backgroundColor: context.colorScheme.surfaceContainer,
       body: CustomScrollView(
         slivers: [
-          SliverAppBar(
-            elevation: 2,
-            forceElevated: true,
-            floating: true,
-            surfaceTintColor: context.colorScheme.surface,
-            shadowColor: context.colorScheme.shadow,
-            automaticallyImplyLeading: false,
-            leadingWidth: double.infinity,
-            leading: Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton.icon(
-                onPressed: () => Navigator.of(context).maybePop(),
-                icon: const Icon(Icons.arrow_back, size: 20),
-                label: Text(
-                  t.actions.backToHome,
-                  style: context.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    color: context.colorScheme.primary,
-                  ),
-                ),
-                style: ButtonStyle(
-                  iconColor: WidgetStateProperty.all(context.colorScheme.primary),
-                  foregroundColor: WidgetStateProperty.all(context.colorScheme.primary),
-                  padding: WidgetStateProperty.all(const EdgeInsets.symmetric(horizontal: 8)),
-                  alignment: Alignment.centerLeft,
-                ),
-              ),
-            ),
-          ),
+          const BackSliverAppBar(),
           SliverPadding(
             padding: const EdgeInsets.fromLTRB(16, 32, 16, 16),
             sliver: SliverList(
@@ -73,8 +46,16 @@ class _RecipeSearchScreenState extends State<RecipeSearchScreen> {
                         color: context.colorScheme.onSurface.withValues(alpha: .7),
                       ),
                       Expanded(
-                        child: Text(
-                          t.recipeSearch.title(name: widget.name),
+                        child: Text.rich(
+                          t.recipeSearch.title(
+                            query: TextSpan(
+                              text: widget.name,
+                              style: context.textTheme.headlineSmall?.copyWith(
+                                fontWeight: .bold,
+                                color: context.colorScheme.primary,
+                              ),
+                            ),
+                          ),
                           maxLines: 2,
                           overflow: TextOverflow.ellipsis,
                           style: context.textTheme.headlineSmall?.copyWith(fontWeight: .bold),

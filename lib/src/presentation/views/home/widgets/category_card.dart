@@ -12,13 +12,13 @@ class CategoryCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        context.pushNamed('category', extra: category);
+        context.pushNamed('category', extra: category, pathParameters: {'name': category.name});
       },
       child: Card(
         elevation: 2,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(borderRadius: .circular(8)),
         child: ClipRRect(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: .circular(8),
           child: Column(
             mainAxisSize: .min,
             crossAxisAlignment: .stretch,
@@ -34,8 +34,8 @@ class CategoryCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 8),
                 child: Text(
                   category.name,
-                  textAlign: TextAlign.center,
-                  style: Theme.of(context).textTheme.titleMedium?.copyWith(fontWeight: .bold),
+                  textAlign: .center,
+                  style: context.textTheme.titleMedium?.copyWith(fontWeight: .bold),
                 ),
               ),
             ],

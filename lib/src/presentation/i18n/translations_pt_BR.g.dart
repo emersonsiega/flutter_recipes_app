@@ -60,8 +60,10 @@ class Translations with BaseTranslations<AppLocale, Translations> {
 		}
 	}
 
+	late final TranslationsVideoPlayerPtBr videoPlayer = TranslationsVideoPlayerPtBr._(_root);
 	late final TranslationsCategoryPtBr category = TranslationsCategoryPtBr._(_root);
 	late final TranslationsRecipeSearchPtBr recipeSearch = TranslationsRecipeSearchPtBr._(_root);
+	late final TranslationsRecipeDetailsPtBr recipeDetails = TranslationsRecipeDetailsPtBr._(_root);
 }
 
 // Path: failures
@@ -105,8 +107,8 @@ class TranslationsRecipesPtBr {
 	/// pt-BR: 'Pesquisar receitas...'
 	String get searchPlaceholder => 'Pesquisar receitas...';
 
-	/// pt-BR: 'Categorias'
-	String get categories => 'Categorias';
+	/// pt-BR: 'Explorar categorias'
+	String get categories => 'Explorar categorias';
 
 	/// pt-BR: 'Nenhuma categoria encontrada'
 	String get noCategoriesFound => 'Nenhuma categoria encontrada';
@@ -128,6 +130,18 @@ class TranslationsRecipesPtBr {
 
 	/// pt-BR: 'Não foi possível carregar as categorias. Por favor, tente novamente.'
 	String get errorLoadingCategories => 'Não foi possível carregar as categorias. Por favor, tente novamente.';
+}
+
+// Path: videoPlayer
+class TranslationsVideoPlayerPtBr {
+	TranslationsVideoPlayerPtBr._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// pt-BR: 'Não foi possível carregar o vídeo. Por favor, tente novamente.'
+	String get errorLoadingVideo => 'Não foi possível carregar o vídeo.\nPor favor, tente novamente.';
 }
 
 // Path: category
@@ -162,8 +176,12 @@ class TranslationsRecipeSearchPtBr {
 
 	// Translations
 
-	/// pt-BR: 'Resultados da busca por "{name}"'
-	String title({required Object name}) => 'Resultados da busca por "${name}"';
+	/// pt-BR: 'Resultados da busca por "{query}"'
+	TextSpan title({required InlineSpan query}) => TextSpan(children: [
+		const TextSpan(text: 'Resultados da busca por "'),
+		query,
+		const TextSpan(text: '"'),
+	]);
 
 	/// pt-BR: '{count} receitas encontradas'
 	String recipesCount({required Object count}) => '${count} receitas encontradas';
@@ -176,6 +194,30 @@ class TranslationsRecipeSearchPtBr {
 
 	/// pt-BR: 'Buscando receitas...'
 	String get loadingRecipes => 'Buscando receitas...';
+}
+
+// Path: recipeDetails
+class TranslationsRecipeDetailsPtBr {
+	TranslationsRecipeDetailsPtBr._(this._root);
+
+	final Translations _root; // ignore: unused_field
+
+	// Translations
+
+	/// pt-BR: 'Vídeo'
+	String get videoTutorial => 'Vídeo';
+
+	/// pt-BR: 'Ingredientes'
+	String get ingredients => 'Ingredientes';
+
+	/// pt-BR: 'Instruções'
+	String get instructions => 'Instruções';
+
+	/// pt-BR: 'Não foi possível carregar a receita. Por favor, tente novamente.'
+	String get errorLoadingRecipe => 'Não foi possível carregar a receita. Por favor, tente novamente.';
+
+	/// pt-BR: 'Nenhuma receita encontrada'
+	String get noRecipeFound => 'Nenhuma receita encontrada';
 }
 
 /// The flat map containing all translations for locale <pt-BR>.
@@ -192,7 +234,7 @@ extension on Translations {
 			'actions.retry' => 'Tentar novamente',
 			'recipes.title' => 'Buscador de receitas',
 			'recipes.searchPlaceholder' => 'Pesquisar receitas...',
-			'recipes.categories' => 'Categorias',
+			'recipes.categories' => 'Explorar categorias',
 			'recipes.noCategoriesFound' => 'Nenhuma categoria encontrada',
 			'recipes.suggestions' => 'Sugestões',
 			'recipes.noSuggestionsFound' => 'Nenhuma sugestão encontrada',
@@ -201,16 +243,22 @@ extension on Translations {
 			'recipes.errorLoadingSuggestions' => 'Não foi possível carregar as sugestões. Por favor, tente novamente.',
 			'recipes.errorLoadingCategories' => 'Não foi possível carregar as categorias. Por favor, tente novamente.',
 			'difficultyLevel' => ({required DifficultyLevel difficulty}) { switch (difficulty) { case DifficultyLevel.easy: return 'Fácil'; case DifficultyLevel.medium: return 'Média'; case DifficultyLevel.hard: return 'Difícil'; } }, 
+			'videoPlayer.errorLoadingVideo' => 'Não foi possível carregar o vídeo.\nPor favor, tente novamente.',
 			'category.title' => ({required Object categoryName}) => '${categoryName}',
 			'category.recipesCount' => ({required Object count}) => '${count} receitas encontradas',
 			'category.noRecipesFound' => 'Nenhuma receita encontrada',
 			'category.errorLoadingRecipes' => 'Não foi possível carregar as receitas. Por favor, tente novamente.',
 			'category.loadingRecipes' => 'Carregando receitas...',
-			'recipeSearch.title' => ({required Object name}) => 'Resultados da busca por "${name}"',
+			'recipeSearch.title' => ({required InlineSpan query}) => TextSpan(children: [ const TextSpan(text: 'Resultados da busca por "'), query, const TextSpan(text: '"'), ]), 
 			'recipeSearch.recipesCount' => ({required Object count}) => '${count} receitas encontradas',
 			'recipeSearch.noRecipesFound' => 'Nenhuma receita encontrada',
 			'recipeSearch.errorLoadingRecipes' => 'Não foi possível buscar as receitas. Por favor, tente novamente.',
 			'recipeSearch.loadingRecipes' => 'Buscando receitas...',
+			'recipeDetails.videoTutorial' => 'Vídeo',
+			'recipeDetails.ingredients' => 'Ingredientes',
+			'recipeDetails.instructions' => 'Instruções',
+			'recipeDetails.errorLoadingRecipe' => 'Não foi possível carregar a receita. Por favor, tente novamente.',
+			'recipeDetails.noRecipeFound' => 'Nenhuma receita encontrada',
 			_ => null,
 		};
 	}

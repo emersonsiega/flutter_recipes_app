@@ -18,5 +18,12 @@ ThemeData buildTheme() {
         borderSide: BorderSide(color: colorScheme.onSurface.withValues(alpha: 0.2), width: 0.5),
       ),
     ),
+    chipTheme: ChipThemeData(
+      backgroundColor: colorScheme.primaryContainer,
+      side: BorderSide.none,
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+      labelStyle: TextStyle(color: colorScheme.primary),
+      iconTheme: IconThemeData(color: colorScheme.primary, size: 14),
+    ),
   );
 }

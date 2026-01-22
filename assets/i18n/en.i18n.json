@@ -10,7 +10,7 @@
     "recipes": {
         "title": "Recipe Finder",
         "searchPlaceholder": "Search for recipes...",
-        "categories": "Categories",
+        "categories": "Browse by category",
         "noCategoriesFound": "No categories found",
         "suggestions": "Suggestions",
         "noSuggestionsFound": "No suggestions found",
@@ -24,6 +24,9 @@
         "medium": "Medium",
         "hard": "Hard"
     },
+    "videoPlayer": {
+        "errorLoadingVideo": "Unable to load the video.\nPlease try again later."
+    },
     "category": {
         "title": "{categoryName} Recipes",
         "recipesCount": "{count} recipes found",
@@ -32,10 +35,17 @@
         "loadingRecipes": "Loading recipes..."
     },
     "recipeSearch": {
-        "title": "Search results for \"{name}\"",
+        "title(rich)": "Search results for \"{query}\"",
         "recipesCount": "{count} recipes found",
         "noRecipesFound": "No recipes found",
         "errorLoadingRecipes": "It was not possible to search the recipes. Please try again.",
         "loadingRecipes": "Searching for recipes..."
+    },
+    "recipeDetails": {
+        "videoTutorial": "Video tutorial",
+        "ingredients": "Ingredients",
+        "instructions": "Instructions",
+        "errorLoadingRecipe": "It was not possible to load the recipe. Please try again.",
+        "noRecipeFound": "No recipe found"
     }
 }

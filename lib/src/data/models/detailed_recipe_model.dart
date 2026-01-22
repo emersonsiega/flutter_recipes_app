@@ -138,6 +138,8 @@ extension DetailedRecipeModelExtension on DetailedRecipeModel {
     // Parse tags - split by comma
     final tags = (strTags ?? '').split(',').map((s) => s.trim()).where((s) => s.isNotEmpty).toList();
 
+    final difficultyLevelFactor = (ingredients.length * 0.5) + instructions.length;
+
     return Recipe.detailed(
           id: idMeal,
           name: strMeal,
@@ -148,11 +150,11 @@ extension DetailedRecipeModelExtension on DetailedRecipeModel {
           category: category,
           tags: tags,
           video: strYoutube != null && strYoutube!.isNotEmpty ? Uri.tryParse(strYoutube!) : null,
-          difficulty: ingredients.length <= 5
-              ? DifficultyLevel.easy
-              : ingredients.length <= 10
-              ? DifficultyLevel.medium
-              : DifficultyLevel.hard,
+          difficulty: switch (difficultyLevelFactor) {
+            <= 15 => .easy,
+            <= 25 => .medium,
+            _ => .hard,
+          },
         )
         as DetailedRecipe;
   }

@@ -79,9 +79,14 @@ extension TestHelpers on Faker {
     Uri? thumbnail,
   }) {
     return Recipe.summary(
-      id: id ?? guid.guid(),
-      name: name ?? food.dish(),
-      thumbnail: thumbnail ?? Uri.parse(internet.httpsUrl()),
-    ) as RecipeSummary;
+          id: id ?? guid.guid(),
+          name: name ?? food.dish(),
+          thumbnail: thumbnail ?? Uri.parse(internet.httpsUrl()),
+        )
+        as RecipeSummary;
+  }
+
+  String youtubeUrl() {
+    return 'https://www.youtube.com/watch?v=${guid.guid().substring(0, 11)}';
   }
 }

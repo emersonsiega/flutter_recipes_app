@@ -1,21 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:flutter_recipes_app/src/domain/domain.dart';
+import 'package:flutter_recipes_app/src/presentation/viewmodel/viewmodel.dart';
 import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_state.dart';
 
-class HomeViewController extends ChangeNotifier {
+class HomeViewController extends ViewModel<HomeState> {
   final IRecipeRepository _recipeRepository;
   final FetchRecipeSuggestions _fetchRecipeSuggestions;
 
   HomeViewController(
     this._recipeRepository,
     this._fetchRecipeSuggestions,
-  );
-
-  HomeState _state = const HomeState(
-    categories: AsyncData(data: [], isLoading: true),
-    suggestions: AsyncData(data: [], isLoading: true),
-  );
-  HomeState get state => _state;
+  ) : super(
+        const HomeState(
+          categories: AsyncData(data: [], isLoading: true),
+          suggestions: AsyncData(data: [], isLoading: true),
+        ),
+      );
 
   /// Fetches all data for the home screen
   Future<void> fetchData() async {
@@ -24,31 +23,33 @@ class HomeViewController extends ChangeNotifier {
 
   /// Fetches the categories for the home screen
   Future<void> fetchCategories() async {
-    _state = _state.copyWith(categories: _state.categories.copyWith(isLoading: true, hasError: false));
-    notifyListeners();
+    emit(state.copyWith(categories: state.categories.copyWith(isLoading: true, hasError: false)));
 
     final result = await _recipeRepository.getCategories();
 
-    final newState = result.fold(
-      ifLeft: (_) => _state.categories.copyWith(hasError: true, isLoading: false),
-      ifRight: (data) => _state.categories.copyWith(isLoading: false, data: data),
+    emit(
+      state.copyWith(
+        categories: result.fold(
+          ifLeft: (_) => state.categories.copyWith(hasError: true, isLoading: false),
+          ifRight: (data) => state.categories.copyWith(isLoading: false, data: data),
+        ),
+      ),
     );
-    _state = _state.copyWith(categories: newState);
-    notifyListeners();
   }
 
   /// Fetches the suggestions for the home screen
   Future<void> fetchSuggestions() async {
-    _state = _state.copyWith(suggestions: _state.suggestions.copyWith(isLoading: true, hasError: false));
-    notifyListeners();
+    emit(state.copyWith(suggestions: state.suggestions.copyWith(isLoading: true, hasError: false)));
 
     final result = await _fetchRecipeSuggestions();
 
-    final newState = result.fold(
-      ifLeft: (_) => _state.suggestions.copyWith(hasError: true, isLoading: false),
-      ifRight: (data) => _state.suggestions.copyWith(data: data, isLoading: false),
+    emit(
+      state.copyWith(
+        suggestions: result.fold(
+          ifLeft: (_) => state.suggestions.copyWith(hasError: true, isLoading: false),
+          ifRight: (data) => state.suggestions.copyWith(data: data, isLoading: false),
+        ),
+      ),
     );
-    _state = _state.copyWith(suggestions: newState);
-    notifyListeners();
   }
 }
