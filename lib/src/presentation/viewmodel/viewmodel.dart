@@ -10,6 +10,7 @@ abstract class ViewModel<T> extends ChangeNotifier {
   }
 
   @override
+  @mustCallSuper
   void dispose() {
     logger.d('$runtimeType disposed');
     super.dispose();
