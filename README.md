@@ -60,11 +60,11 @@ Shared infrastructure components:
 
 ### Key Technologies
 
-- **State Management**: Provider
+- **State Management**: Provider + ChangeNotifier
 - **Navigation**: GoRouter
 - **HTTP Client**: http package
 - **Internationalization**: slang
-- **Code Generation**: Freezed, json_serializable, Slang
+- **Code Generation**: Freezed, Json Serializable, Slang
 - **Architecture Pattern**: Clean Architecture with MVVM
 
 ## How to Run the Project
