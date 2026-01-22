@@ -9,8 +9,8 @@ final appRouter = GoRouter(
     GoRoute(
       name: 'home',
       path: '/',
-      builder: (context, state) => ChangeNotifierProvider<HomeViewController>(
-        create: (context) => HomeViewController(
+      builder: (context, state) => ChangeNotifierProvider<HomeViewModel>(
+        create: (context) => HomeViewModel(
           context.read<IRecipeRepository>(),
           context.read<FetchRecipeSuggestions>(),
         ),
@@ -27,8 +27,8 @@ final appRouter = GoRouter(
       },
       builder: (context, state) {
         final recipe = state.extra as Recipe;
-        return ChangeNotifierProvider<RecipeDetailsViewController>(
-          create: (context) => RecipeDetailsViewController(
+        return ChangeNotifierProvider<RecipeDetailsViewModel>(
+          create: (context) => RecipeDetailsViewModel(
             context.read<IRecipeRepository>(),
           ),
           child: RecipeDetailsScreen(recipe: recipe),
@@ -65,8 +65,8 @@ final appRouter = GoRouter(
         final category = state.extra as Category?;
         final name = state.pathParameters['name'] ?? '';
 
-        return ChangeNotifierProvider<CategoryViewController>(
-          create: (context) => CategoryViewController(
+        return ChangeNotifierProvider<CategoryViewModel>(
+          create: (context) => CategoryViewModel(
             context.read<IRecipeRepository>(),
           ),
           child: CategoryScreen(category: category, name: name),

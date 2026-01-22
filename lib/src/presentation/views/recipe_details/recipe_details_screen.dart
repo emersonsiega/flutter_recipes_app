@@ -21,7 +21,7 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
   void initState() {
     super.initState();
     postFrame(() {
-      context.read<RecipeDetailsViewController>().fetchRecipeDetail(widget.recipe);
+      context.read<RecipeDetailsViewModel>().fetchRecipeDetail(widget.recipe);
     });
   }
 
@@ -80,7 +80,7 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
   }
 
   Widget _buildDetails() {
-    final state = context.watch<RecipeDetailsViewController>().state;
+    final state = context.watch<RecipeDetailsViewModel>().state;
 
     return switch (state) {
       RecipeDetailsState(:final isLoading) when isLoading => SliverFillRemaining(
@@ -94,7 +94,7 @@ class _RecipeDetailsScreenState extends State<RecipeDetailsScreen> {
             padding: const EdgeInsets.all(16),
             child: ErrorMessageBox(
               message: t.recipeDetails.errorLoadingRecipe,
-              onRetry: () => context.read<RecipeDetailsViewController>().fetchRecipeDetail(widget.recipe),
+              onRetry: () => context.read<RecipeDetailsViewModel>().fetchRecipeDetail(widget.recipe),
             ),
           ),
         ),

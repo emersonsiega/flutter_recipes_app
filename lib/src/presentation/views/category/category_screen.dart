@@ -22,13 +22,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
   void initState() {
     super.initState();
     postFrame(() {
-      context.read<CategoryViewController>().fetchRecipes(widget.category, widget.name);
+      context.read<CategoryViewModel>().fetchRecipes(widget.category, widget.name);
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<CategoryViewController>().state;
+    final state = context.watch<CategoryViewModel>().state;
 
     return Scaffold(
       backgroundColor: context.colorScheme.surfaceContainer,
@@ -63,7 +63,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         child: ErrorMessageBox(
                           message: t.category.errorLoadingRecipes,
                           onRetry: () =>
-                              context.read<CategoryViewController>().fetchRecipes(widget.category, widget.name),
+                              context.read<CategoryViewModel>().fetchRecipes(widget.category, widget.name),
                         ),
                       ),
                       CategoryState(:final recipes) when recipes.isEmpty => Padding(

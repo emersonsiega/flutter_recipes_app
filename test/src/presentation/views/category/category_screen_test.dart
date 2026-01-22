@@ -8,10 +8,10 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/faker_test_helpers.dart';
 
-class MockCategoryViewController extends Mock implements CategoryViewController {}
+class MockCategoryViewModel extends Mock implements CategoryViewModel {}
 
 void main() {
-  late MockCategoryViewController mockViewModel;
+  late MockCategoryViewModel mockViewModel;
   late Faker faker;
   late Category testCategory;
 
@@ -22,14 +22,14 @@ void main() {
   });
 
   setUp(() {
-    mockViewModel = MockCategoryViewController();
+    mockViewModel = MockCategoryViewModel();
     testCategory = faker.createCategory();
     LocaleSettings.setLocale(AppLocale.ptBr);
   });
 
-  Widget createTestWidget(CategoryViewController viewModel, Category? category, String name) {
+  Widget createTestWidget(CategoryViewModel viewModel, Category? category, String name) {
     return MaterialApp(
-      home: ChangeNotifierProvider<CategoryViewController>.value(
+      home: ChangeNotifierProvider<CategoryViewModel>.value(
         value: viewModel,
         child: CategoryScreen(category: category, name: name),
       ),

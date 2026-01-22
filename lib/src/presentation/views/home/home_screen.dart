@@ -21,7 +21,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     postFrame(() {
-      context.read<HomeViewController>().fetchData();
+      context.read<HomeViewModel>().fetchData();
     });
   }
 
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<Widget> _buildCategories(BuildContext context) {
-    final categories = context.select<HomeViewController, AsyncData<List<Category>>>(
+    final categories = context.select<HomeViewModel, AsyncData<List<Category>>>(
       (viewModel) => viewModel.state.categories,
     );
     return <Widget>[
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: ErrorMessageBox(
-              onRetry: context.read<HomeViewController>().fetchCategories,
+              onRetry: context.read<HomeViewModel>().fetchCategories,
               retryLabel: t.actions.retry,
               message: t.recipes.errorLoadingCategories,
             ),
@@ -121,7 +121,7 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   List<Widget> _buildSuggestions(BuildContext context) {
-    final suggestions = context.select<HomeViewController, AsyncData<List<Recipe>>>(
+    final suggestions = context.select<HomeViewModel, AsyncData<List<Recipe>>>(
       (viewModel) => viewModel.state.suggestions,
     );
     return [
@@ -138,7 +138,7 @@ class _HomeScreenState extends State<HomeScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: ErrorMessageBox(
-              onRetry: context.read<HomeViewController>().fetchSuggestions,
+              onRetry: context.read<HomeViewModel>().fetchSuggestions,
               retryLabel: t.actions.retry,
               message: t.recipes.errorLoadingSuggestions,
             ),

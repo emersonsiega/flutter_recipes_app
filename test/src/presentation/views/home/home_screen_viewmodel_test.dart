@@ -13,7 +13,7 @@ class MockRecipeRepository extends Mock implements IRecipeRepository {}
 class MockFetchRecipeSuggestions extends Mock implements FetchRecipeSuggestions {}
 
 void main() {
-  late HomeViewController sut;
+  late HomeViewModel sut;
   late MockRecipeRepository mockRecipeRepository;
   late MockFetchRecipeSuggestions mockFetchRecipeSuggestions;
   late Faker faker;
@@ -21,7 +21,7 @@ void main() {
   setUp(() {
     mockRecipeRepository = MockRecipeRepository();
     mockFetchRecipeSuggestions = MockFetchRecipeSuggestions();
-    sut = HomeViewController(mockRecipeRepository, mockFetchRecipeSuggestions);
+    sut = HomeViewModel(mockRecipeRepository, mockFetchRecipeSuggestions);
     faker = Faker();
   });
 

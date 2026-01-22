@@ -10,10 +10,10 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/faker_test_helpers.dart';
 
-class MockRecipeDetailsViewController extends Mock implements RecipeDetailsViewController {}
+class MockRecipeDetailsViewModel extends Mock implements RecipeDetailsViewModel {}
 
 void main() {
-  late MockRecipeDetailsViewController mockViewModel;
+  late MockRecipeDetailsViewModel mockViewModel;
   late Faker faker;
   late RecipeSummary testRecipe;
 
@@ -23,14 +23,14 @@ void main() {
   });
 
   setUp(() {
-    mockViewModel = MockRecipeDetailsViewController();
+    mockViewModel = MockRecipeDetailsViewModel();
     testRecipe = faker.createRecipeSummary();
     LocaleSettings.setLocale(AppLocale.ptBr);
   });
 
-  Widget createTestWidget(RecipeDetailsViewController viewModel, Recipe recipe) {
+  Widget createTestWidget(RecipeDetailsViewModel viewModel, Recipe recipe) {
     return MaterialApp(
-      home: ChangeNotifierProvider<RecipeDetailsViewController>.value(
+      home: ChangeNotifierProvider<RecipeDetailsViewModel>.value(
         value: viewModel,
         child: RecipeDetailsScreen(recipe: recipe),
       ),

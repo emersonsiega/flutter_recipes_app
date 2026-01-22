@@ -2,11 +2,11 @@ import 'package:flutter_recipes_app/src/domain/domain.dart';
 import 'package:flutter_recipes_app/src/presentation/viewmodel/viewmodel.dart';
 import 'package:flutter_recipes_app/src/presentation/views/home/home_screen_state.dart';
 
-class HomeViewController extends ViewModel<HomeState> {
+class HomeViewModel extends ViewModel<HomeState> {
   final IRecipeRepository _recipeRepository;
   final FetchRecipeSuggestions _fetchRecipeSuggestions;
 
-  HomeViewController(
+  HomeViewModel(
     this._recipeRepository,
     this._fetchRecipeSuggestions,
   ) : super(

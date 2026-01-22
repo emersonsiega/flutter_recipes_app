@@ -9,21 +9,21 @@ import 'package:provider/provider.dart';
 
 import '../../../utils/faker_test_helpers.dart';
 
-class MockHomeViewController extends Mock implements HomeViewController {}
+class MockHomeViewModel extends Mock implements HomeViewModel {}
 
 void main() {
-  late MockHomeViewController mockViewModel;
+  late MockHomeViewModel mockViewModel;
   late Faker faker;
 
   setUp(() {
-    mockViewModel = MockHomeViewController();
+    mockViewModel = MockHomeViewModel();
     faker = Faker();
     LocaleSettings.setLocale(AppLocale.ptBr);
   });
 
-  Widget createTestWidget(HomeViewController viewModel) {
+  Widget createTestWidget(HomeViewModel viewModel) {
     return MaterialApp(
-      home: ChangeNotifierProvider<HomeViewController>.value(
+      home: ChangeNotifierProvider<HomeViewModel>.value(
         value: viewModel,
         child: const HomeScreen(),
       ),
