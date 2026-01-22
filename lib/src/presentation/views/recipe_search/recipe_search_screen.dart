@@ -25,7 +25,9 @@ class _RecipeSearchScreenState extends State<RecipeSearchScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.watch<RecipeSearchScreenViewModel>().state;
+    final state = context.select<RecipeSearchScreenViewModel, RecipeSearchState>(
+      (viewModel) => viewModel.state,
+    );
 
     return Scaffold(
       backgroundColor: context.colorScheme.surfaceContainer,

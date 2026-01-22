@@ -152,6 +152,7 @@ Screenshots and GIFs will be added here to showcase:
 The following features are planned for future releases:
 
 - [ ] Add custom layout for Web/Desktop platforms
+- [ ] Add caching for categories
 - [ ] Save/list favorite recipes
 - [ ] Add rating mechanism for recipes
 - [ ] Publish the Web version
