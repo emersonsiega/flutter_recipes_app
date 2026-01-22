@@ -244,7 +244,7 @@ class _RecipeChips extends StatelessWidget {
           avatar: Icon(Icons.speed_rounded),
           label: Text(t.difficultyLevel(difficulty: recipe.difficulty)),
         ),
-        for (final tag in recipe.tags) Chip(key: ValueKey(tag), avatar: Icon(Icons.sell_outlined), label: Text(tag)),
+        for (final tag in recipe.tags) Chip(avatar: Icon(Icons.sell_outlined), label: Text(tag)),
       ],
     );
   }
