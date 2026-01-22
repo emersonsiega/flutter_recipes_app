@@ -240,11 +240,11 @@ class _RecipeChips extends StatelessWidget {
           avatar: Icon(Icons.restaurant_rounded),
           label: Text(recipe.category.name),
         ),
-        if (recipe.area?.isNotEmpty ?? false) Chip(avatar: Icon(Icons.location_on_outlined), label: Text(recipe.area!)),
         Chip(
           avatar: Icon(Icons.speed_rounded),
           label: Text(t.difficultyLevel(difficulty: recipe.difficulty)),
         ),
+        if (recipe.area?.isNotEmpty ?? false) Chip(avatar: Icon(Icons.location_on_outlined), label: Text(recipe.area!)),
         for (final tag in recipe.tags) Chip(avatar: Icon(Icons.sell_outlined), label: Text(tag)),
       ],
     );

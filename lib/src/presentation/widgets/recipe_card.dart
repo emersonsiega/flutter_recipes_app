@@ -56,22 +56,31 @@ class RecipeCard extends StatelessWidget {
                     overflow: .ellipsis,
                     style: context.textTheme.titleMedium?.copyWith(fontWeight: .bold),
                   ),
-                  if (recipe case DetailedRecipe(
-                    :final area,
-                    :final tags,
-                    :final difficulty,
-                  ) when (area?.isNotEmpty ?? false) && tags.isNotEmpty)
+                  if (recipe case DetailedRecipe(:final area, :final tags, :final difficulty, :final category))
                     Wrap(
                       direction: .horizontal,
                       spacing: 4,
                       runSpacing: 4,
                       children: [
                         Text(
-                          area!,
+                          category.name,
                           style: context.textTheme.bodySmall?.copyWith(
                             color: context.colorScheme.onSurface.withValues(alpha: .6),
                           ),
                         ),
+                        Text(
+                          '• ${t.difficultyLevel(difficulty: difficulty)}',
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: context.colorScheme.onSurface.withValues(alpha: .6),
+                          ),
+                        ),
+                        if (area?.isNotEmpty ?? false)
+                          Text(
+                            "• ${area!}",
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: context.colorScheme.onSurface.withValues(alpha: .6),
+                            ),
+                          ),
                         if (tags.isNotEmpty)
                           Text(
                             '• ${tags.join(', ')}',
@@ -79,12 +88,6 @@ class RecipeCard extends StatelessWidget {
                               color: context.colorScheme.onSurface.withValues(alpha: .6),
                             ),
                           ),
-                        Text(
-                          '• ${t.difficultyLevel(difficulty: difficulty)}',
-                          style: context.textTheme.bodySmall?.copyWith(
-                            color: context.colorScheme.onSurface.withValues(alpha: .6),
-                          ),
-                        ),
                       ],
                     ),
                 ],
